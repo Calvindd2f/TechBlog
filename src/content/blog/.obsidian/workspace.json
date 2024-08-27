@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Wireless Pentesting Gear.md",
+                "file": "second-post.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Wireless Pentesting Gear.md",
+                "file": "second-post.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Wireless Pentesting Gear.md",
+                "file": "second-post.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Wireless Pentesting Gear.md"
+                "file": "second-post.md"
               }
             }
           }
@@ -161,9 +161,12 @@
   },
   "active": "18dbc38028850c7f",
   "lastOpenFiles": [
+    "OSWP - Wireless Pentesting Gear.md",
+    "Wireless Pentesting Gear.md",
+    "OSWP - Pineapple scripts.md",
+    "Untitled.md",
     "second-post.md",
     "template-post-reference.md",
-    "Wireless Pentesting Gear.md",
     "Welcome.md",
     "markdown-style-guide.md",
     "first-post.md"
