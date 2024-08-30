@@ -2,7 +2,7 @@
 title: SonarQube PowerShell Plugin
 description: Blog entry about hardware for wireless
 pubDate: Apr 6 2024
-heroImage: /blog-placeholder-3.jpg
+heroImage: /blog-sonar.jpg
 ---
 After tinkering with SonarQube for long enough and being impressed with the results from scanners in C# and, begrudgingly - C++ , I immediately turned my attention to seeing if powershell was supported and... unsurprisingly it was not.
 

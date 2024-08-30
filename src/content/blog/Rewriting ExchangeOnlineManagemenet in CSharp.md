@@ -2,7 +2,7 @@
 title: Rewriting EXO in C#
 description: Rewriting the EXO module in C# powershell
 pubDate: Aug 08 2024
-heroImage: /blog-placeholder-1.jpg
+heroImage: /blog-powershell-exchange.jpg
 ---
 So despite all other Microsoft provided powershell modules (including, the useless, forgotten OneDrive one) being written in C# for the obvious performance gains and all other benefits ExchangeOnline had never been moved.
 

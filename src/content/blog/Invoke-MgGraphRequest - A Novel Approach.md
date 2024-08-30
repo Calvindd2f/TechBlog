@@ -2,7 +2,7 @@
 title: Invoke-MgGraphRequest - A Novel Approach
 description: Lorem ipsum dolor sit amet
 pubDate: Jun 19 2024
-heroImage: /blog-placeholder-3.jpg
+heroImage: /blog-invoke-ps.jpg
 ---
 So a solution I had put forth on a repository I had been contributing to for a while was accepted. The issue was primarily to do with resource exhaustion / out of memory on large datasets that were being retrieved using the Microsoft standard PowerShell modules.
 

@@ -2,7 +2,7 @@
 title: SonarQube PowerShell Plugin - Creation of Custom Rules
 description: Lorem ipsum dolor sit amet
 pubDate: Apr 19 2024
-heroImage: /blog-placeholder-3.jpg
+heroImage: /blog-sonar-ai.jpg
 ---
 With the completion of the readers,issue structure, sensors, fillers,ast along with the base of the plugin and associated profiles / XML schemas for the issues - the first test did not work. 
 
