@@ -9,9 +9,9 @@ The markdown file needs the properties title,desc,pubdate and an image - cannot 
 
 ```md
 ---
-title: 'C'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
+title: 'Baselining Intune for many tenants'
+description: 'Exporting Intune Configuration from a dev tenant and deploying agreed upon standards in the client tenant. Also allows a manual backup of Intune env.'
+pubDate: 'Feb 08 2024'
 heroImage: '/blog-placeholder-3.jpg'
 ---
 
