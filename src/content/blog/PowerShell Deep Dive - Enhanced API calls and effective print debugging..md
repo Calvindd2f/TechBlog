@@ -79,9 +79,144 @@ while ($RetryCount -lt $retry -and $success -eq $false)
 }
 ```
 
+The meat of the the `try` is using the HTTP .NET library to define the request based off the CW API url.
+
+Afterwards the HTTP `method`, `content-type` are declared.
+
+Because of how CW API works - the bytes of the access token are stored in a variable. The `auth string` for the `Authroization` header is defined as `'Basic' + ' ' + 'ByteVariable to Base64'` - this is all added to the authorization header.
+
+The `client_id` is added afterwards and finally a timeout for the request.
+
+```powershell
+$request = [System.Net.HttpWebRequest]::Create("$CW_Api_Url/apis/3.0/company/contacts$querystring")   
+$request.Method = "GET";
+$request.ContentType = "application/json";
+$authBytes = [System.Text.Encoding]::UTF8.GetBytes($CW_Api_Token);
+$authStr = "Basic " + $([System.Convert]::ToBase64String($authBytes));
+$request.Headers["Authorization"] = $authStr;
+$request.Headers["clientId"] = $CW_Api_Client_Id;
+$request.Timeout = 10000
+```
+
+The response is streamed into a variable and once stored - the response object is disposed of.
+
+```powershell
+$response = $request.GetResponse();
+$reader = new-object System.IO.StreamReader $response.GetResponseStream();
+$jsonResult = $reader.ReadToEnd();
+$response.Dispose();
+```
+
+We employ print debugging after this to output our returned object - I will segment the print debugging from the actual logic for better overview.
+
+```powershell
+if ($Global:MxSDebug) { Write-Host "========================= JSON result from WEB(GetContact): $jsonResult" }
+```
+
+```powershell
+[array]$returnedObject = $jsonResult | ConvertFrom-Json
+```
+
+```powershell
+if ($Global:MxSDebug) { Write-Host "`r`n===================== Count of found objects: $($returnedObject.Count) `r`n" }
+```
+
+Continuing with this, we iterate over each item in the returned object and verify the fields. Print debugging prints out all of the fields returned regardless.
+
+If the fields match, `$sucess` is `$true` and the `$contactitem` is returned.  This is done again with the `jsonresult` returned as a powershell object from JSON.
+
+```powershell
+if ($returnedObject.Count -gt 1)
+{
+foreach ($contactItem in $returnedObject)
+{
+	if ($Global:MxSDebug) { Write-Host "=====================ContactItem===> $($contactItem)" }
+	if ($Global:MxSDebug) { Write-Host "=====================ContactItem>>>> $($contactItem.id)" }
+	if ($Global:MxSDebug) { Write-Host "=====================ContactItem>>>> $($contactItem.firstName) Compare to $($userObjectToAction.firstName)" }
+	if ($Global:MxSDebug) { Write-Host "=====================ContactItem>>>> $($contactItem.lastName) Compare to $($userObjectToAction.lastName)" }
+
+	
+	If (($contactItem.firstName -eq $userObjectToAction.firstName) -and ($contactItem.lastName -eq $userObjectToAction.lastName))
+	{
+		$success = $true
+		return $( $contactItem  )
+	}
+}
+
+$success = $true
+return $( $jsonResult | ConvertFrom-Json)
+}
+else
+{
+	$success = $true
+	return $( $jsonResult | ConvertFrom-Json)
+}
+
+}
+```
+
+Our `catch` begins to handle the exceptions and this is where print debugging really shines. We print the exception, check if in test environment, get any fail codes, loop if the fail codes are in the specified loop codes - backoff where necessary. If all else fails it returns null.
+
+```powershell
+catch
+{
+if ($Global:MxSDebug) { Write-Host "========================= WARNING: $($_.Exception.Message)" }
+# Write-Host "========================= WARNING: $( ConvertTo-json $_.Exception)"
+# Geeting the actual numeric value for the error code.
+# When we run through MxS Env we will get nested InnerException inside the 
+# parent InnerException as we are utilising a HTTP WebClient Wrapper on top
+# of the MxS environment
+if ( Test-Path variable:global:psISE )
+{
+if ($Global:MxSDebug) { Write-Host "==================Running package locally for debugging===========" }
+$ErrorCode = $_.Exception.InnerException.Response.StatusCode.value__
+}
+else
+{
+if ($Global:MxSDebug) { Write-Host "========================= Running package in MxS" }
+$ErrorCode = $_.Exception.InnerException.InnerException.Response.StatusCode.value__
+}
+if ($Global:MxSDebug) { Write-Host "========================= Errorcode: $ErrorCode" }
+# Checking if we got any of Fail Codes
+if ($ErrorCode -in $FailCodes)
+{
+# Setting the variables to make activity Fail
+$success = $false;
+$activityOutput.success = $false;
+# If we need immediate stop - we can uncomment below.
+# Write-Error "CRITICAL: $($_.Exception.Message)" -ErrorAction Stop
+Write-Warning "Warning: $($_.Exception.Message)"
+return $null;
+}
+if ($ErrorCode -in $RetryCodes)
+{
+$RetryCount++
+
+if ($RetryCount -eq $retry)
+{
+if ($Global:MxSDebug) { Write-host "========================= WARNING: Retry limit reached." }
+}
+else
+{
+if ($Global:MxSDebug) { Write-host "========================= Waiting $WaitTime seconds." }
+Start-Sleep -seconds $WaitTime
+if ($Global:MxSDebug) { Write-host "========================= Retrying." }
+}
+
+}
+else
+{
+return $null;
+}
+}
+}
+}
+```
 
 
+------------------------
 
+Here is the full function with all of the aforementioned features.
 
 ```powershell
 Function GetContact($email, $query, $companyid, $userObjectToAction, $retry = 5)
