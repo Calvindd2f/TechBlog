@@ -1,0 +1,117 @@
+---
+title: SonarQube PowerShell Plugin
+description: Blog entry about hardware for wireless
+pubDate: Apr 6 2024
+heroImage: /blog-placeholder-3.jpg
+---
+After tinkering with SonarQube for long enough and being impressed with the results from scanners in C# and, begrudgingly - C++ , I immediately turned my attention to seeing if powershell was supported and... unsurprisingly it was not.
+
+While, I understand this for the most part - I really enjoy SonarQube and didn't enjoy the thought of converting all my modules to binary (C#) just for an after thought.
+
+I decided the best place to start was the closest to static code analysis for powershell, which is Microsoft's PSScriptAnalyzer. My primary focus in the beginning was to get the default rules working and have them toggle-able, as my own, non-idiomatic rules were why I wanted to create the plugin in the first place. The custom rules being heavily focused on performance.
+
+After going over the documentation for creation and working my head around maven along with reviewing other custom plugins (no public powershell ones were quite what I was chasing). 
+
+I got started on constants, file suffixes and scriptanalyzerruledefinitions and felt significantly more confident with java, along with finally understanding the concept on why people perceive c# as Microsoft's Java equivalent.
+
+The primary roadblock was porting over PowerShells `AST` and `Tokens` to Java for the scanner and assessing them based off the same structure the PSScriptAnalyzer uses, the Java equivalent of the powershell issue output for script analyzer looks a bit like this:
+
+```java
+public class PsIssue {
+    public String ruleId;
+    public String message;
+    public int line = 0;
+    public String severity = "MAJOR";
+    public String file;
+}
+```
+
+The actual sensors, reviewing everything from a different perspective (meaning, recognizing that everything fails if the analyzer module is not installed) took a lot longer than I'm comfortable declaring.
+
+`parser.ps1` under `/resources` is the bread and butter in scanning, writing the output of the scan and defining the complexity. I don't know if it is elitism but I had trouble defining the complexity so defaulted on increasing the complexity based on the amount of conditional statements just to get the first working release pushed out. This is a bit more of a compromise but after the nightmare setting up the sensors I just wanted functionality before I let my own opinionated thoughts rabbit hole.
+
+**parser.ps1**
+```powershell
+param( 
+	[string]$inputFile,
+	[string]$output,
+	[int] $depth = 9999999
+)
+
+$text = ([IO.File]::ReadAllText($inputFile)) -replace "\xEF\xBB\xBF", "";
+$tokens = $null
+$errors = $null
+$ast = [Management.Automation.Language.Parser]::ParseInput($text , [ref]$tokens, [ref]$errors);
+
+$complexity = 1;
+$switches = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.SwitchStatementAst]}, $true)
+
+Foreach ( $item in $switches ) { 
+    $complexity += $item.Clauses.Count
+}
+
+$tryCatches = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.TryStatementAst]}, $true)
+
+Foreach ( $item in $tryCatches ) { 
+    $complexity += $item.CatchClauses.Count
+}
+
+$ifs = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.IfStatementAst]}, $true)
+
+Foreach ( $item in $ifs ) {
+    $complexity += 2
+}
+
+$binaryExpressions = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.BinaryExpressionAst]}, $true)
+
+Foreach ( $item in $binaryExpressions ) {
+
+    $complexity += 1
+}
+
+$whileStatements = $ast.FindAll({$args[0] -is [System.Management.Automation.Language.WhileStatementAst]}, $true)
+Foreach ( $item in $whileStatements ) {
+    $complexity += 1
+}
+
+$xmlWriter = New-Object System.XMl.XmlTextWriter($output , $Null);
+$xmlWriter.WriteStartDocument();
+$xmlWriter.WriteStartElement("Tokens");
+$xmlWriter.WriteAttributeString("complexity", $complexity);
+
+Foreach ($item in $tokens) {	
+	$xmlWriter.WriteStartElement("Token");
+	$xmlWriter.WriteElementString("Text", $item.Text);
+	$xmlWriter.WriteElementString("Value", $item.Value);
+	$xmlWriter.WriteElementString("TokenFlags", $item.TokenFlags);
+	$xmlWriter.WriteElementString("Kind", [System.Management.Automation.Language.TokenKind]::GetName([System.Management.Automation.Language.TokenKind], $item.Kind.value__));
+	$xmlWriter.WriteElementString("StartLineNumber", $item.Extent.StartLineNumber);
+	$xmlWriter.WriteElementString("CType", $item.GetType().Name);
+	$xmlWriter.WriteElementString("EndLineNumber", $item.Extent.EndLineNumber);
+	$xmlWriter.WriteElementString("StartOffset", $item.Extent.StartOffset);
+	$xmlWriter.WriteElementString("EndOffset", $item.Extent.EndOffset);
+	$xmlWriter.WriteElementString("StartColumnNumber", $item.Extent.StartColumnNumber);
+	$xmlWriter.WriteElementString("EndColumnNumber", $item.Extent.EndColumnNumber);
+	$xmlWriter.WriteEndElement(); 
+}
+
+$xmlWriter.WriteEndElement();
+$xmlWriter.WriteEndDocument();
+$xmlWriter.Finalize;
+$xmlWriter.Flush;
+$xmlWriter.Close();
+```
+
+The script analyzer invocation is in it's own separate file, which imports the module then calls the function, converts it to XML while saving the output to "$output"
+
+**scriptAnalyzer.ps1**
+```powershell
+param( 
+[string]$inputDir,
+[string]$output
+)
+Import-Module PSScriptAnalyzer;
+(Invoke-ScriptAnalyzer -Path "$inputDir" -Recurse | Select-Object RuleName, Message, Line, Column, Severity, @{Name='File';Expression={$_.Extent.File }} | ConvertTo-Xml).Save("$output")
+```
+
+In hindsight, a preventative try/catch should be included in the next update to force download the module if the import fails. I might make this a bit longer than necessary in order to handle the errors with different approaches.

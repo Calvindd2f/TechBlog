@@ -37,14 +37,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "OSWP - Wireless Pentesting Gear.md",
+                "file": "SonarQube PowerShell Plugin - Initial Setup.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "305422afa16a30bb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Invoke-MgGraphRequest - further capabilities.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -110,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "OSWP - Wireless Pentesting Gear.md",
+                "file": "Invoke-MgGraphRequest - further capabilities.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "OSWP - Wireless Pentesting Gear.md",
+                "file": "Invoke-MgGraphRequest - further capabilities.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "OSWP - Wireless Pentesting Gear.md"
+                "file": "Invoke-MgGraphRequest - further capabilities.md"
               }
             }
           }
@@ -171,16 +183,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8cfbb787ef598a7e",
+  "active": "305422afa16a30bb",
   "lastOpenFiles": [
-    "Invoke-MgGraphRequest - further capabilities.md",
     "Invoke-MgGraphRequest - A Novel Approach.md",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
-    "OSWP - Wireless Pentesting Gear.md",
+    "SonarQube PowerShell Plugin - Initial Setup.md",
+    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
+    "Invoke-MgGraphRequest - further capabilities.md",
     "OSWP - Pineapple scripts.md",
-    "markdown-style-guide.md",
-    "template-post-reference.md",
     "second-post.md",
+    "template-post-reference.md",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "markdown-style-guide.md",
     "Pasted image 20240830003204.png",
     "Pasted image 20240830002948.png",
     "Pasted image 20240830002604.png",
