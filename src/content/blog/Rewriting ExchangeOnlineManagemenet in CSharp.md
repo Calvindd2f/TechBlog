@@ -1,0 +1,297 @@
+---
+title: Rewriting EXO in C#
+description: Rewriting the EXO module in C# powershell
+pubDate: Aug 08 2024
+heroImage: /blog-placeholder-1.jpg
+---
+So despite all other Microsoft provided powershell modules (including, the useless, forgotten OneDrive one) being written in C# for the obvious performance gains and all other benefits ExchangeOnline had never been moved.
+
+My suspicion for the longest time has been that it is entirely powershell in the backend and an API is a bit much of a task where a lot of functionality (but far far from all) is done by graph.
+
+Its still early days but In this part of a series I'll layout my reasoning, where to get the source on disk and the layout of the skeleton on top of all of the functions that are not 'Global Functions' not mattering a lot due to being executed in the same way. 
+
+To obtain the source yourself, aside from viewing it on PowerShell gallery you can call Connect-ExchangeOnline -Verbose , connect and also see the directory with the module that's created at runtime
+
+```txt
+┌──(c㉿CALVIN)-[C:\Users\c]
+└─PS> Connect-ExchangeOnline -verbose
+VERBOSE: Computed version info: 3.5.1
+VERBOSE: ModuleVersion: 3.5.1
+VERBOSE: [ThreadID: #] Trying to get a new token from AAD
+VERBOSE: [ThreadID: #] Trying to acquire token based on UI flow
+VERBOSE: [ThreadID: #] Acquired new token when no params are passed
+VERBOSE: [ThreadID: #] Successfully got a token from AAD
+
+----------------------------------------------------------------------------------------
+This V3 EXO PowerShell module contains new REST API backed Exchange Online cmdlets which doesn't require WinRM for Client-Server communication. You can now run these cmdlets after turning off WinRM Basic Auth in your client machine thus making it more secure.
+
+Unlike the EXO* prefixed cmdlets, the cmdlets in this module support full functional parity with the RPS (V1) cmdlets.
+
+V3 cmdlets in the downloaded module are resilient to transient failures, handling retries and throttling errors inherently.
+
+REST backed EOP and SCC cmdlets are also available in the V3 module. Similar to EXO, the cmdlets can be run without WinRM basic auth enabled.
+
+For more information check https://aka.ms/exov3-module
+----------------------------------------------------------------------------------------
+
+VERBOSE: AutoGen EXOModule created at  C:\Users\c\AppData\Local\Temp\tmpEXO_ydrhjgka.nhz
+VERBOSE: Running Configure-AppSettings
+VERBOSE: Setting PrintWarningsReceivedFromServer to False
+VERBOSE: PageSizes is set to: 1000
+VERBOSE: Logs location is reset to C:\Users\c\AppData\Local\Temp\EXOCmdletTelemetry
+VERBOSE: Max directory size reset to 2000000000
+VERBOSE: Max log size reset to 100000000
+VERBOSE: Log level reset to Default
+VERBOSE: Logger reset to null.
+VERBOSE: TrackPerformance is set to: False
+VERBOSE: ShowProgress is set to: False
+VERBOSE: UseMultithreading is set to: True
+```
+
+so we go to the directory (which is cleaned and named different each time) and find the source
+
+```
+┌──(c㉿CALVIN)-[C:\Users\c]
+└─PS> cd C:\Users\c\AppData\Local\Temp\tmpEXO_ydrhjgka.nhz
+
+┌──(c㉿CALVIN)-[C:\Users\c\AppData\Local\Temp\tmpEXO_ydrhjgka.nhz]
+└─PS> dir
+
+    Directory: C:\Users\c\AppData\Local\Temp\tmpEXO_ydrhjgka.nhz
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d----          29/08/2024    19:05                en-us
+-a---          29/08/2024    19:05         820895 exchange.format.ps1xml
+-a---          29/08/2024    19:05          33457 tmpEXO_ydrhjgka.nhz.psd1
+-a---          29/08/2024    19:05        2242118 tmpEXO_ydrhjgka.nhz.psm1
+```
+
+Unlike the .psm1 the regions for contants, region for global variables and the  region for constant functions are split into separate files . This is because I can but also because constant and global variables are very small yet important. 
+
+Now the constant functions are pretty much the backbone of all of the functions as in these are used for the requests, error handling, batching, pagination, connection assertions, logging, execution, complex conversions (to-bytearraycollection,to-hashtable,boolsanitization etc).
+
+By backbone, I simply mean that every other cmdlet are executed using all of these in order to send the request to the server-side, which is essentially the string of the cmdlet along with the parameters (hence the assumption that the true backend is some form of powershell api)
+
+The actual meat of the cmdlets, for the aforementioned reasoning are in a folder named `functions`, and the namespaces are based off of the powershell help ps1xml files which categorized the cmdlets `CalendarsAndGroups` or `CalendarsAndGroups`.
+
+Hence the namespaces being `Exchange.Functions.CalendarsAndGroups`, `Exchange.Functions.ProvisioningAndMigration`, `Exchange.Functions.RecordsandEdge` for all of the namespaces. (11) 
+
+Some examples:
+
+```csharp
+namespace Exchange.Functions.ProvisioningAndMigration
+{
+    public class AddRecipientPermission : PSCmdlet
+    {}
+	
+	public class CompleteMigrationBatch : PSCmdlet
+	{}
+}
+```
+
+Realising after the fact that every function did not have unique code, instead relying on the ExecuteCommand function, among others in constant functions with the parameters being the only unique aspect. 
+
+This mean that the conversion of constant functions to C# needed to be perfect and would be the brunt of the work in the project - which is easier said as they all depend on functions also defined.
+
+To put this into context the following screenshots are just the Execute-Command function... and not the entirety of the function at that (Highlighting Comments and proof of what indicates server-side powershell)
+
+![[Pasted image 20240829205209.png]]
+![[Pasted image 20240829205048.png]]
+![[Pasted image 20240829204800.png]]
+![[Pasted image 20240829204624.png]]
+
+For context here is an example of the functions from the namespace, where aside from the parameters - the code just uses constant functions to send the request:
+
+```powershell
+# .ExternalHelp Microsoft.Exchange.TransportMailflow-Help.xml
+function script:Get-PerimeterConfig
+{
+    [CmdletBinding()]
+    param(
+    
+    [Parameter(ParameterSetName='Identity', Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+    ${Identity}
+    )
+    Begin {
+        $CmdletRequestId, $cmdletRequestIdGeneratedInBegin, $cmdletIDList = Init-CmdletBegin -CmdletParameters $MyInvocation.BoundParameters -CmdletName $MyInvocation.MyCommand.Name
+
+        try
+        {
+                $UseBatching, $BatchBodyObj, $BatchRequestParameters = Execute-CmdletBatchingBeginBody -EnableBatchingStatus:$true -ExpectingInput $PSCmdlet.MyInvocation.ExpectingInput
+        }
+        catch
+        {
+            Commit-CmdletLogOnError -CmdletRequestId $CmdletRequestId -ErrorRecord $_
+            $global:EXO_LastExecutionStatus = $false;
+            throw $_
+        }
+
+    }
+    Process {      
+        $cmdletRequestIdGeneratedInBegin, $cmdletRequestIdGeneratedInProcess, $CmdletRequestId, $cmdletIDList = Init-CmdletProcess -CmdletRequestIdGeneratedInBegin $cmdletRequestIdGeneratedInBegin -UseBatching $UseBatching -BatchBodyObj $BatchBodyObj -CmdletRequestId $CmdletRequestId -CmdletIDList $cmdletIDList -CmdletParameters $MyInvocation.BoundParameters -CmdletName $MyInvocation.MyCommand.Name
+
+        try
+        {
+            
+            Execute-Command -CmdletName 'Get-PerimeterConfig' -Parameters $PSBoundParameters -CmdletRequestId $CmdletRequestId 
+        }
+        catch
+        {
+            Commit-CmdletLogOnError -CmdletRequestId $CmdletRequestId -ErrorRecord $_
+            $global:EXO_LastExecutionStatus = $false;
+            throw $_
+        }
+
+        finally
+        {
+            Log-EndTimeInCmdletProcessBlock -UseBatching $UseBatching -CmdletRequestId $CmdletRequestId
+        }
+
+    }
+    End {
+        Execute-CmdletEndBlock -BatchBodyObj $BatchBodyObj -CmdletRequestId $CmdletRequestId -CmdletIDList $cmdletIDList
+    }
+}
+```
+
+The next part in this series will likely either be detailing the rigors and blockers in converting the constant functions or an overview once the conversion is done, just before moving onto the cmdlets.
+
+This will not be easy but I've already had creating a Execution function previously to automate exchange activities, while this took some time it actually plays on the same concept of the server-side processing and required me to really study the module to create (because it was easier then any form of porting & only way to automate it.) while at the time, I opted out of using `Invoke-WebRequest` for the HTTP library for granularity. 
+
+The following snippet is from `Execute-Command`
+```powershell
+$Result = Invoke-WebRequest -UseBasicParsing -TimeoutSec $timeout -Method 'POST' -Headers $Headers -Body $Body -Uri $Uri 
+```
+
+Here is the bare minimum in `ExoCommand` which is what I had previously created for automation purposes
+
+```powershell
+Function ExoCommand($conn, $command, [HashTable]$cargs, $retryCount = 5) 
+{
+    $success = $false
+    $count = 0
+    
+    $body = @{
+         CmdletInput = @{
+              CmdletName="$command"
+         }
+    }
+
+    if($cargs -ne $null){
+        $body.CmdletInput += @{Parameters= [HashTable]$cargs}
+    }
+
+    $json = $body | ConvertTo-Json -Depth 5 -Compress
+    [string]$commandFriendly = $($body.CmdletInput.CmdletName)
+
+    for([int]$x = 0 ; $x -le $($body.CmdletInput.Parameters.Count - 1); $x++){
+        try{$param = " -$([Array]$($body.CmdletInput.Parameters.Keys).Item($x))"}catch{$param = ''}
+        try{$value = "`"$([Array]$($body.CmdletInput.Parameters.Values).Item($x) -join ',')`""}catch{$value = ''}
+        $commandFriendly += $("$param $value").TrimEnd()
+    }
+    Write-Host "Executing: $commandFriendly"
+    Write-Host $json
+    
+    [string]$url = $("https://outlook.office365.com/adminapi/beta/$tenant_name/InvokeCommand")
+    if(![string]::IsNullOrEmpty($Properties)){
+        $url = $url + $('?%24select='+$($Properties.Trim().Replace(' ','')))
+    }
+    [Array]$Data = @()
+    do{
+        try{
+            do{
+           
+
+                ## Using HTTPWebRequest library
+
+                $request = [System.Net.HttpWebRequest]::Create($url)
+        	    $request.Method = "POST";
+	            $request.ContentType =  "application/json;odata.metadata=minimal;odata.streaming=true;";
+	            $request.Headers["Authorization"] = "Bearer $($exo_token)"
+                $request.Headers["x-serializationlevel"] = "Partial"
+                #$request.Headers["x-clientmoduleversion"] = "2.0.6-Preview6"
+                $request.Headers["X-AnchorMailbox"] = $("UPN:SystemMailbox{bb558c35-97f1-4cb9-8ff7-d53741dc928c}@$tenant_name")
+                $request.Headers["X-prefer"] = "odata.maxpagesize=1000"
+                #$request.Headers["Prefer"] = 'odata.include-annotations="display.*"'
+                $request.Headers["X-ResponseFormat"] = "json" ## Can also be 'clixml'
+                $request.Headers["connection-id"] = "$conn_id"
+                #$request.Headers["accept-language"] = "en-GB"
+                $request.Headers["accept-charset"] = "UTF-8"
+                #$request.Headers["preference-applied"] = ''
+                $request.Headers["warningaction"] = ""
+                $request.SendChunked = $true;
+                $request.TransferEncoding = "gzip"
+                $request.UserAgent = "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-AU) WindowsPowerShell/5.1.19041.1682"
+                #$request.Host = "outlook.office365.com"
+                $request.Accept = 'application/json'
+        	    $request.Timeout = $($defaultTimeout*1000)
+
+        	    $requestWriter = New-Object System.IO.StreamWriter $request.GetRequestStream();
+	            $requestWriter.Write($json);
+	            $requestWriter.Flush();
+	            $requestWriter.Close();
+	            $requestWriter.Dispose()
+
+                $response = $request.GetResponse();
+                $reader = new-object System.IO.StreamReader $response.GetResponseStream();
+                $jsonResult = $reader.ReadToEnd();
+                $result = $(ConvertFrom-Json $jsonResult)
+                $response.Dispose();
+
+                if(@($result.value).Count -ne 0){
+                    $Data += $($result.value)
+                    Write-Host "Got $($result.value.Count) items"
+                }
+                try{$url = $result.'@odata.nextLink'}catch{$url = ''}
+                if(![string]::IsNullOrEmpty($url)){
+                    Write-Host "Getting next page..."
+                }
+            }while(![string]::IsNullOrEmpty($url))
+            $success = $true
+            $count = $retry
+        	return @($Data)
+        } catch {
+
+            if($($_.Exception.Message) -like "*timed out*" -or $($_.Exception.Message) -like "*Unable to connect to the remote server*"){
+                $count++
+                Write-Host "WARNING: TIMEOUT: Will retry in 10 seconds."
+                Start-Sleep -seconds 10
+                if($count -gt $retry){throw "Timeout retry limit reached"}
+            }
+           else{
+                Write-Host "WARNING: Failed to execute Exchange command: $commandFriendly"
+                Write-Host "WARNING: $($_.Exception.Message)"
+                throw;
+            }
+        }
+    }while($count -lt $retry -or $success -eq $false)
+    return $null
+}
+```
+
+And here is an example of it's usage in automation outside of the function declarations:
+
+```powershell
+Function CheckSuccess($dl, $conn, $user)
+{
+    $members = ExoCommand -conn $conn -Command "Get-DistributionGroupMember" -cargs @{ Identity = $dl }
+            
+    foreach($mem in $members)
+    {
+        if($mem.WindowsLiveID -eq $user)
+        {
+            return $false;
+        }
+    }
+    
+      Write-Host "Success!"
+    
+    return $true;
+}
+```
+
+I extend upon this because default powershell cmdlets in the conversion to C# will also need to be supplemented - but I have already done this with the library with success.
+
+
+

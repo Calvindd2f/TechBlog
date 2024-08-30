@@ -8,31 +8,43 @@
         "type": "tabs",
         "children": [
           {
-            "id": "431bc95835af9b1f",
+            "id": "e649c18134353f0f",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template-post-reference.md",
+                "file": "Invoke-MgGraphRequest - A Novel Approach.md",
                 "mode": "source",
                 "source": false
               }
             }
           },
           {
-            "id": "18dbc38028850c7f",
+            "id": "44218c8442855133",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "second-post.md",
+                "file": "Invoke-MgGraphRequest - A Novel Approach.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "8cfbb787ef598a7e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "OSWP - Wireless Pentesting Gear.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "second-post.md",
+                "file": "OSWP - Wireless Pentesting Gear.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "second-post.md",
+                "file": "OSWP - Wireless Pentesting Gear.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "second-post.md"
+                "file": "OSWP - Wireless Pentesting Gear.md"
               }
             }
           }
@@ -159,16 +171,28 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "18dbc38028850c7f",
+  "active": "8cfbb787ef598a7e",
   "lastOpenFiles": [
+    "Invoke-MgGraphRequest - further capabilities.md",
+    "Invoke-MgGraphRequest - A Novel Approach.md",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
     "OSWP - Wireless Pentesting Gear.md",
-    "Wireless Pentesting Gear.md",
     "OSWP - Pineapple scripts.md",
-    "Untitled.md",
-    "second-post.md",
-    "template-post-reference.md",
-    "Welcome.md",
     "markdown-style-guide.md",
+    "template-post-reference.md",
+    "second-post.md",
+    "Pasted image 20240830003204.png",
+    "Pasted image 20240830002948.png",
+    "Pasted image 20240830002604.png",
+    "Pasted image 20240830002328.png",
+    "Pasted image 20240830001814.png",
+    "Pasted image 20240829205209.png",
+    "Pasted image 20240829205048.png",
+    "Pasted image 20240829204800.png",
+    "Pasted image 20240829204750.png",
+    "Pasted image 20240829204624.png",
+    "Wireless Pentesting Gear.md",
+    "Welcome.md",
     "first-post.md"
   ]
 }
