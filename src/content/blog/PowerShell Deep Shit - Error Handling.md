@@ -1,0 +1,240 @@
+---
+title: PowerShell Deep Shit - Error Handling
+description: Error handling overview for PS and many other languages
+pubDate: Mar 08 2023
+heroImage: /blog-placeholder-2.jpg
+---
+
+`odata.maxpagesize` can't be greater than the **ODataServicesMaxPageSize** server setting for on-premises and 20000 for online.
+
+
+ online are set up to use a maximum of 20,000 entities per page by default.
+
+
+Paging divides the data feed of a request into smaller chunks, or pages, which can't contain more than a specific number of entities.
+
+
+
+
+
+
+
+
+
+
+## HTTP Response code anticipation with arrays
+
+##### HTTP status codes
+
+The following table lists and describes the HTTP status codes that can be returned by the graph api specifically, while these response codes do have an RFC for their actual status message - it is best to check the API you are calling for their description of what it means, the graph api has the status message as a short description but the actual meaning under `Description` in their documentation. 
+
+| Status code | Status message                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------- | ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 400         | Bad Request                     | Can't process the request because it's malformed or incorrect.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 401         | Unauthorized                    | Required authentication information is either missing or not valid for the resource.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 402         | Payment Required                | The [payment requirements](https://learn.microsoft.com/en-us/graph/metered-api-list) for the API haven't been met.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| 403         | Forbidden                       | Access is denied to the requested resource. The user might not have enough permission or might not have a required license.  <br>  <br>**Important:** If conditional access policies are applied to a resource, an `HTTP 403; Forbidden error=insufficient_claims` message may be returned. For more information on Microsoft Graph and conditional access, see [Developer Guidance for Microsoft Entra Conditional Access](https://learn.microsoft.com/en-us/azure/active-directory/develop/active-directory-conditional-access-developer). |
+| 404         | Not Found                       | The requested resource doesn’t exist.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| 405         | Method Not Allowed              | The HTTP method in the request isn't allowed on the resource.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| 406         | Not Acceptable                  | This service doesn’t support the format requested in the Accept header.                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| 409         | Conflict                        | The current state conflicts with what the request expects. For example, the specified parent folder might not exist.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| 410         | Gone                            | The requested resource is no longer available at the server.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| 411         | Length Required                 | A Content-Length header is required on the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 412         | Precondition Failed             | A precondition provided in the request (such as an if-match header) doesn't match the resource's current state.                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 413         | Request Entity Too Large        | The request size exceeds the maximum limit.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 415         | Unsupported Media Type          | The content type of the request is a format that isn't supported by the service.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 416         | Requested Range Not Satisfiable | The specified byte range is invalid or unavailable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 422         | Unprocessable Entity            | Can't process the request because it is semantically incorrect.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| 423         | Locked                          | The resource that is being accessed is locked.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 429         | Too Many Requests               | Client application has been throttled and shouldn't attempt to repeat the request until an amount of time has elapsed.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| 500         | Internal Server Error           | There was an internal server error while processing the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| 501         | Not Implemented                 | The requested feature isn’t implemented.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| 503         | Service Unavailable             | The service is temporarily unavailable for maintenance or is overloaded. You may repeat the request after a delay, the length of which may be specified in a Retry-After header.                                                                                                                                                                                                                                                                                                                                                             |
+| 504         | Gateway Timeout                 | The server, while acting as a proxy, didn't receive a timely response from the upstream server it needed to access in attempting to complete the request.                                                                                                                                                                                                                                                                                                                                                                                    |
+| 507         | Insufficient Storage            | The maximum storage quota has been reached.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| 509         | Bandwidth Limit Exceeded        | Your app has been throttled for exceeding the maximum bandwidth cap. Your app can retry the request again after more time has elapsed.                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+
+
+
+
+
+---------------
+
+## Error Structure - Graph Example
+
+A good frame of reference is creating an enum / struct / pscustomobject based on MGraph beta API error handling properties.
+
+#### JSON representation
+
+The error resource is composed of a single resource:
+
+```JSON
+{
+  "error": {
+    "code": "string",
+    "message": "string",
+    "innererror": { 
+      "code": "string"
+    },
+    "details": []
+  }
+}
+```
+
+```JSON
+{
+	"error": { 
+		"code": "badRequest", 
+		"message": "Uploaded fragment overlaps with existing data.",
+		"innerError": { 
+			"code": "invalidRange", 
+			"request-id": "request-id", 
+			"date": "date-time" 
+		} 
+	} 
+}
+```
+
+-------------------------
+
+#### Error Structure Example
+
+| **code**       | string       | An error code string for the error that occurred                                                                                         |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **message**    | string       | A developer ready message about the error that occurred. This shouldn't be displayed to the user directly.                               |
+| **innererror** | error object | Optional. An additional error object that might be more specific than the top-level error.                                               |
+| **details**    | error object | Optional. A list of additional error objects that might provide a breakdown of multiple errors encountered while processing the request. |
+#### Properties
+
+The **code** property contains a machine-readable value that you can take a dependency on in your code.
+
+The **innererror** object might recursively contain more **innererror** objects with additional, more specific error **codes** properties. When handling an error, apps should loop through all the nested error codes that are available and use the most detailed one that they understand.
+
+The **message** property is a human-readable value that describes the error condition. Don't take any dependency on the content of this value in your code.
+
+The **message** property at the root contains an error message intended for the developer to read. Error messages aren't localized and shouldn't be displayed directly to the user. When handling errors, your code shouldn't take any dependency on the **message** property values because they can change at any time, and they often contain dynamic information specific to the failed request. You should only code against error codes returned in **code** properties.
+
+The **details** property is an optional array of error objects that have the same JSON format as the top-level error object. In the case of a request that is composed of multiple operations, such as a bulk or batch operation, it might be necessary to return an independent error for each operation. In this case, the **details** list is populated with these individual errors.
+
+
+----------------------
+
+## Few PowerShell examples
+
+Here is a very privative and generic API request that is shows it's it
+s strength in the error handling. 
+
+```powershell
+function New-ApiRequest {
+
+    <#
+    .SYNOPSIS
+    Makes a API request.
+
+    .DESCRIPTION
+    Returns the API response.
+
+    .PARAMETER ApiMethod
+    Provide API Method GET, PUT or POST
+
+    .PARAMETER ApiRequest
+    See Datto RMM API swagger UI
+
+    .PARAMETER ApiRequestBody
+    Only used with PUT and POST request
+
+    .INPUTS
+    $apiUrl = The API URL
+    $apiKey = The API Key
+    $apiKeySecret = The API Secret Key
+
+    .OUTPUTS
+    API response
+
+    #>
+
+    Param(
+        [Parameter(Mandatory = $True)]
+        [ValidateSet('GET', 'PUT', 'POST', 'DELETE')]
+        [string]$apiMethod,
+
+        [Parameter(Mandatory = $True)]
+        [string]$apiRequest,
+
+        [Parameter(Mandatory = $False)]
+        [string]$apiRequestBody
+    )
+
+    # Check API Parameters
+    if (!$script:ApiUrl -or !$script:ApiAccessToken) {
+        Write-Host "API Parameters missing, please run Set-DrmmApiParameters first!"
+        return
+    }
+
+    # Define parameters for Invoke-WebRequest cmdlet
+    $params = [ordered] @{
+        Uri         = '{0}/api{1}' -f $script:ApiUrl, $apiRequest
+        Method      = $apiMethod
+        ContentType = 'application/json'
+        Headers     = @{
+            'Authorization' = 'Bearer {0}' -f $script:ApiAccessToken
+        }
+    }
+
+    # Add body to parameters if present
+    If ($apiRequestBody) {
+        # Convert body to UTF8
+        [byte[]]$apiRequestBody = [System.Text.Encoding]::UTF8.GetBytes($apiRequestBody)
+        $params.Add('Body', $apiRequestBody)
+    }
+
+    $maxRetries = 3  # Maximum number of retries
+    $retryCount = 0
+
+    do {
+        try {
+            $response = Invoke-WebRequest -UseBasicParsing @params
+            $content = [System.Text.Encoding]::UTF8.GetString($response.RawContentStream.ToArray())
+            return $content  # Return successful response content and exit the function
+        }
+        catch {
+            $errorObject = $_
+            $exceptionError = $_.Exception.Message
+
+            switch ($exceptionError) {
+                'The remote server returned an error: (429).' {
+                    Write-Warning 'New-ApiRequest : API rate limit breached, sleeping for 60 seconds'
+                    Start-Sleep -Seconds 60
+                }
+                'The remote server returned an error: (403) Forbidden.' {
+                    Write-Warning 'New-ApiRequest : AWS DDOS protection breached, sleeping for 5 minutes'
+                    Start-Sleep -Seconds 300
+                }
+                'The remote server returned an error: (404) Not Found.' {
+                    Write-Error "New-ApiRequest : $apiRequest not found!"
+                    return
+                }
+                'The remote server returned an error: (504) Gateway Timeout.' {
+                    Write-Warning "New-ApiRequest : Gateway Timeout, sleeping for 60 seconds"
+                    Start-Sleep -Seconds 60
+                }
+                default {
+                    Write-Error $errorObject
+                    return
+                }
+            }
+        }
+
+        $retryCount++
+        if ($retryCount -lt $maxRetries) {
+            Write-Warning "New-ApiRequest : Retrying API request $apiRequest (Attempt $retryCount of $maxRetries)"
+        }
+        else {
+            Write-Error "New-ApiRequest : Maximum retry attempts reached."
+            break
+        }
+    } while ($retryCount -lt $maxRetries)
+
+}
+```
