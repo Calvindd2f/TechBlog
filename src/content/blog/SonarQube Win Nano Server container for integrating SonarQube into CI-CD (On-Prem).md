@@ -1,5 +1,5 @@
 ---
-title: Setting up a window nano server container for integrating SonarQube into CI-CD (On-Prem)
+title: SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem
 description: Exporting Intune Configuration from a dev tenant and deploying agreed upon standards in the client tenant. Also allows a manual backup of Intune env.
 pubDate: May 08 2024
 heroImage: /blog-placeholder-3.jpg

@@ -1,5 +1,5 @@
 ---
-title: Invoke-MgGraphRequest - A Novel Approach
+title: Invoke-MgGraphRequest
 description: Lorem ipsum dolor sit amet
 pubDate: Jun 19 2024
 heroImage: /blog-invoke-ps.jpg

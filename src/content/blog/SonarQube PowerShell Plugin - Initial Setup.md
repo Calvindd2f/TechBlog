@@ -1,6 +1,6 @@
 ---
 title: SonarQube PowerShell Plugin
-description: Blog entry about hardware for wireless
+description: Blog entry about SQPS
 pubDate: Apr 6 2024
 heroImage: /blog-sonar.jpg
 ---

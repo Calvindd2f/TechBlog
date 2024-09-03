@@ -1,6 +1,6 @@
 ---
-title: 'C'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 08 2022'
-heroImage: '/blog-placeholder-3.jpg'
+title: OSWP - Pineapple scripts
+description: Pineapple scripts for usage with wifi pineapple to make it a bit more useful
+pubDate: Feb 08 2024
+heroImage: /blog-placeholder-3.jpg
 ---

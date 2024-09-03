@@ -4,23 +4,23 @@
     "type": "split",
     "children": [
       {
-        "id": "7917ec1ec89fa387",
+        "id": "d5fcefc1c710acec",
         "type": "tabs",
         "children": [
           {
-            "id": "2c5b6015350022fa",
+            "id": "0065a28eecc3e955",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template-post-reference.md",
+                "file": "PowerShell Deep Shit - Binary Dependency Injection.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "6fbcccc1caa73336",
+            "id": "21b48a44cdf0590f",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -77,8 +77,17 @@
               "type": "bookmarks",
               "state": {}
             }
+          },
+          {
+            "id": "4329a93bf554189a",
+            "type": "leaf",
+            "state": {
+              "type": "mk-path-view",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -160,36 +169,41 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "6fbcccc1caa73336",
+  "active": "21b48a44cdf0590f",
   "lastOpenFiles": [
-    "template-post-reference.md",
-    "Port forwarding residential DSL modem..md",
-    "PowerShell Deep Shit - Error Handling.md",
-    "Creating a WSL2 log collector for error analysis.md",
     "Fileless Injection Analysis - EDR litmus test.md",
+    "Invoke-MgGraphRequest - A Novel Approach.md",
+    "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
+    "Creating a WSL2 log collector for error analysis.md",
+    "Rooting and porting Nethunter + Kernel to RN7.md",
+    "OSWP - Pineapple scripts.md",
+    "markdown-style-guide.md",
+    "PowerShell Deep Shit - Error Handling.md",
+    "Port forwarding residential DSL modem..md",
     "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
+    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
+    "SonarQube PowerShell Plugin - Initial Setup.md",
+    "template-post-reference.md",
+    "AGPTs stock capabilities.md",
+    "PowerShell Deep Shit - Binary Dependency Injection.md",
+    "httpsc2doneright.md",
+    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
+    "second-post.md",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "Invoke-MgGraphRequest - further capabilities.md",
+    "first-post.md",
+    "Pasted image 20240829204750.png",
+    "Tags",
     "Pasted image 20240901201651.png",
     "Pasted image 20240901201206.png",
     "Pasted image 20240901201044.png",
-    "SonarQube PowerShell Plugin - Initial Setup.md",
-    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
-    "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
-    "Invoke-MgGraphRequest - A Novel Approach.md",
-    "Invoke-MgGraphRequest - further capabilities.md",
-    "markdown-style-guide.md",
     "Pasted image 20240829204624.png",
-    "OSWP - Pineapple scripts.md",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
     "Pasted image 20240830144016.png",
     "Pasted image 20240830143203.png",
-    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
-    "second-post.md",
     "Pasted image 20240830003204.png",
     "Pasted image 20240830002948.png",
     "Pasted image 20240830002604.png",
-    "Pasted image 20240830002328.png",
     "Wireless Pentesting Gear.md",
-    "Welcome.md",
-    "first-post.md"
+    "Welcome.md"
   ]
 }

@@ -1,5 +1,5 @@
 ---
-title: collecting wsl logs on windows for wsl2
+title: WSL2 Log Collection on W11
 description: WSL2
 pubDate: Feb 15 2022
 heroImage: /blog-invoke-ps.jpg

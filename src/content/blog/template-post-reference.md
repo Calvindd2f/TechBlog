@@ -1,8 +1,8 @@
 ---
-title: 'CB test'
-description: 'Lorem ipsum dolor sit amet'
-pubDate: 'Jul 22 2022'
-heroImage: '/blog-placeholder-2.jpg'
+title: template-post-reference
+description: Lorem ipsum dolor sit amet
+pubDate: Nov 1 2019
+heroImage: /blog-placeholder-2.jpg
 ---
 
 The markdown file needs the properties title,desc,pubdate and an image - cannot be null for the image but there are placeholders available.
