@@ -10,11 +10,18 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.1.4",
+    "@astrojs/check": "^0.9.3",
+    "@astrojs/mdx": "^3.1.5",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
     "astro": "^4.14.5",
-    "@astrojs/check": "^0.9.3",
+    "monaco-editor-core": "^0.51.0",
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@shikijs/monaco": "^1.16.1",
+    "@shikijs/rehype": "^1.16.1",
+    "@shikijs/transformers": "^1.16.1",
+    "shiki": "^1.16.1"
   }
 }

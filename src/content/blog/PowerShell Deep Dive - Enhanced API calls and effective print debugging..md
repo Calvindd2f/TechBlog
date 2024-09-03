@@ -2,7 +2,7 @@
 title: PowerShell Deep Dive - Enhanced API calls and effective print debugging.
 description: Me going over the ideal method to do API calls from powershell functions with effective EH and catching the correct response codes.
 pubDate: Aug 30 2024
-heroImage: /blog-placeholder-3.jpg
+heroImage: /blog-powershell-exchange.jpg
 ---
 
 This is a new enough series I have created that goes over how I tend to structure API calls within powershell functions or at least a rough estimate. 

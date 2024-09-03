@@ -13,7 +13,19 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PowerShell Deep Shit - Binary Dependency Injection.md",
+                "file": "httpsc2doneright.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "485e2e3f932a29ee",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
                 "mode": "preview",
                 "source": false
               }
@@ -86,8 +98,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -107,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Port forwarding residential DSL modem..md",
+                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Port forwarding residential DSL modem..md",
+                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Port forwarding residential DSL modem..md"
+                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md"
               }
             }
           }
@@ -169,29 +180,34 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "21b48a44cdf0590f",
+  "active": "485e2e3f932a29ee",
   "lastOpenFiles": [
-    "Fileless Injection Analysis - EDR litmus test.md",
-    "Invoke-MgGraphRequest - A Novel Approach.md",
+    "Golden Image GitOps Pipeline with Ansible Platform.md",
+    "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
+    "Containerizing Unifi Wireless LAN Controller on Linux.md",
+    "Anisble VPS Automation Github Workflows.md",
+    "Terraform - Unifi.md",
+    "Terraform - MikroTik.md",
+    "Terraform - HyperV.md",
+    "C# - Binary PowerShell ModulesCMDlets.md",
+    "Binary PowerShell Cmdlets.md",
     "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
-    "Creating a WSL2 log collector for error analysis.md",
+    "httpsc2doneright.md",
     "Rooting and porting Nethunter + Kernel to RN7.md",
-    "OSWP - Pineapple scripts.md",
-    "markdown-style-guide.md",
-    "PowerShell Deep Shit - Error Handling.md",
-    "Port forwarding residential DSL modem..md",
-    "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
-    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
-    "SonarQube PowerShell Plugin - Initial Setup.md",
     "template-post-reference.md",
     "AGPTs stock capabilities.md",
-    "PowerShell Deep Shit - Binary Dependency Injection.md",
-    "httpsc2doneright.md",
-    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
-    "second-post.md",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "SonarQube PowerShell Plugin - Initial Setup.md",
+    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
+    "markdown-style-guide.md",
+    "OSWP - Pineapple scripts.md",
+    "Port forwarding residential DSL modem..md",
     "Invoke-MgGraphRequest - further capabilities.md",
-    "first-post.md",
+    "Invoke-MgGraphRequest - A Novel Approach.md",
+    "PowerShell Deep Shit - Dependency Injection.md",
+    "Creating a WSL2 log collector for error analysis.md",
+    "Fileless Injection Analysis - EDR litmus test.md",
+    "PowerShell Deep Shit - Error Handling.md",
+    "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
     "Pasted image 20240829204750.png",
     "Tags",
     "Pasted image 20240901201651.png",
@@ -202,8 +218,6 @@
     "Pasted image 20240830143203.png",
     "Pasted image 20240830003204.png",
     "Pasted image 20240830002948.png",
-    "Pasted image 20240830002604.png",
-    "Wireless Pentesting Gear.md",
-    "Welcome.md"
+    "Pasted image 20240830002604.png"
   ]
 }

@@ -79,7 +79,7 @@
   "inlineBacklinks": false,
   "inlineContext": true,
   "inlineBacklinksExpanded": false,
-  "inlineContextExpanded": true,
+  "inlineContextExpanded": false,
   "inlineContextProperties": true,
   "inlineContextSectionsExpanded": true,
   "dataviewInlineContext": false,
