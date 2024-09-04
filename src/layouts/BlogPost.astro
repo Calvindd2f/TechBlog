@@ -1,85 +1,88 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import Base from "@layouts/Base.astro";
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "@components/FormattedDate.astro";
+import CalendarIcon from "@icons/CalendarIcon.astro";
+import CategoryIcon from "@icons/CategoryIcon.astro";
+import { Image } from "astro:assets";
+import config from "@config/config.json";
+import { slugify } from "@utils/slug";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, heroImage, categories, tags } =
+  Astro.props;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
-
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base meta_title={title} description={description} image={heroImage} blogpost>
+  <article>
+    <div class="rounded-lg block overflow-hidden mb-8">
+      {
+        heroImage && (
+          <figure class="w-auto h-auto md:h-[480px] object-cover">
+            <Image
+              class="transition duration-300 ease-in-out hover:scale-110"
+              src={heroImage}
+              alt={title}
+              width={960}
+              height={480}
+              decoding="async"
+              loading="lazy"
+            />
+          </figure>
+        )
+      }
+    </div>
+    <div class="md:col-10 text-center mb-12">
+      <h1 class="text-2xl md:text-4xl font-bold">{title}</h1>
+      <div class="mt-4 flex flex-wrap items-center justify-center text-text text-zinc-800 dark:text-zinc-200">
+        <div class="mx-3 flex items-center flex-wrap font-medium mt-2">
+          <figure>
+            <Image
+              alt={config.author.name}
+              class="mr-2 h-6 w-6 rounded-full"
+              width={50}
+              height={50}
+              src={config.author.avatar}
+              decoding="async"
+              loading="lazy"
+            />
+          </figure>
+          <span>{config.author.name}</span>
+        </div>
+        <div class="mx-3 flex items-center flex-wrap font-medium mt-2">
+          <CalendarIcon />
+          <FormattedDate date={pubDate} />
+        </div>
+        <div class="mx-3 flex items-center flex-wrap font-medium mt-2">
+          <CategoryIcon />
+          {
+            categories?.slice(0, 1).map((category) => (
+              <a
+                href={`/categories/${slugify(category)}`}
+                class="mr-2 hover:text-primary font-medium capitalize"
+              >
+                {category}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="prose prose-green prose-md md:prose-lg min-w-full">
+      <slot />
+    </div>
+    <div class="mt-8">
+      {
+        tags?.map((tag) => (
+          <a
+            href={`/tags/${slugify(tag)}`}
+            class="capitalize inline-block bg-zinc-200 rounded-full px-3 py-1 text-sm font-semibold text-zinc-700 mr-2 mb-2 dark:bg-zinc-900 dark:text-zinc-400"
+          >
+            #{tag}
+          </a>
+        ))
+      }
+    </div>
+  </article>
+</Base>

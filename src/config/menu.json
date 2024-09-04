@@ -1,0 +1,28 @@
+{
+  "main": [
+    {
+      "name": "Home",
+      "url": "/"
+    },
+    {
+      "name": "Blog",
+      "url": "/Blog"
+    },
+    {
+      "name": "About Me",
+      "url": "/about"
+    },
+    {
+      "name": "Resume",
+      "url": "/cv"
+    },
+    {
+      "name": "Certificates",
+      "url": "/certs"
+    },
+    {
+      "name": "KBs",
+      "url": "/KB"
+    }
+  ]
+}

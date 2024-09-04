@@ -4,41 +4,29 @@
     "type": "split",
     "children": [
       {
-        "id": "d5fcefc1c710acec",
+        "id": "bc8f82c9bd7cd1bf",
         "type": "tabs",
         "children": [
           {
-            "id": "0065a28eecc3e955",
+            "id": "3ae8328b66fe835c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "httpsc2doneright.md",
+                "file": "API Creation - Notes for tf providers.md",
                 "mode": "preview",
                 "source": false
               }
             }
           },
           {
-            "id": "485e2e3f932a29ee",
+            "id": "b7581b139cf44e17",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "21b48a44cdf0590f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Port forwarding residential DSL modem..md",
-                "mode": "preview",
+                "file": "PowerShell Orchestrator.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -118,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
+                "file": "PowerShell Orchestrator.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
+                "file": "PowerShell Orchestrator.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Extracting - Importing Intune Configuration Across Multiple Tenants.md"
+                "file": "PowerShell Orchestrator.md"
               }
             }
           }
@@ -180,8 +168,19 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "485e2e3f932a29ee",
+  "active": "b7581b139cf44e17",
   "lastOpenFiles": [
+    "template-post-reference.md",
+    "Lotto Posting.md",
+    "API Creation - Notes for tf providers.md",
+    "Binary PowerShell Cmdlets.md",
+    "AGPTs stock capabilities.md",
+    "PowerShell Orchestrator.md",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "httpsc2doneright.md",
+    "Port forwarding residential DSL modem..md",
+    "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
+    "Terraform - Fortigate.md",
     "Golden Image GitOps Pipeline with Ansible Platform.md",
     "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
     "Containerizing Unifi Wireless LAN Controller on Linux.md",
@@ -190,24 +189,13 @@
     "Terraform - MikroTik.md",
     "Terraform - HyperV.md",
     "C# - Binary PowerShell ModulesCMDlets.md",
-    "Binary PowerShell Cmdlets.md",
-    "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
-    "httpsc2doneright.md",
     "Rooting and porting Nethunter + Kernel to RN7.md",
-    "template-post-reference.md",
-    "AGPTs stock capabilities.md",
     "SonarQube PowerShell Plugin - Initial Setup.md",
     "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
     "markdown-style-guide.md",
     "OSWP - Pineapple scripts.md",
-    "Port forwarding residential DSL modem..md",
     "Invoke-MgGraphRequest - further capabilities.md",
     "Invoke-MgGraphRequest - A Novel Approach.md",
-    "PowerShell Deep Shit - Dependency Injection.md",
-    "Creating a WSL2 log collector for error analysis.md",
-    "Fileless Injection Analysis - EDR litmus test.md",
-    "PowerShell Deep Shit - Error Handling.md",
-    "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
     "Pasted image 20240829204750.png",
     "Tags",
     "Pasted image 20240901201651.png",

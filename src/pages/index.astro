@@ -1,38 +1,15 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from "astro:content";
+import HomePagination from "@components/HomePagination.astro";
+import Base from "@layouts/Base.astro";
+import Posts from "@layouts/Posts.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title="Calvins Blog" description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Hello, Visitor!</h1>
-			<p>
-				I hope you like Automation, Code and Azure or you might want to reconsider reading.
-				<br>
-				My Tech Blog which is built with Astro, blog posts in Markdown (via Obsidian) and also a personal website to track projects findings over time. My analysis, findings, side-projects, certificates and CV are on this site. I'm backfilling some blog posts as I have a lot of code and side-projects but seemed to leave the documentation and usage in the READMEs.
-				<br>
-				<br>
-				The 'About Me' just delves into surface level info. Then goes deeper into my technology history.
-				<br>
-				<br>
-				'Resume' and 'Certificates' are fairly self-explanatory.
-				<br>
-				<br>
-				I may create a KB section at a later date - to have an index of the more edge-case/irritating issues that have landed my way.
-				<br>
-				If you are here only because of the domain, you can discuss this with me at c@lvin.ie.
-				<br>
-			</p>
-			<p>If you are trying to find a specific post or some snippet of code, anything discussed is also located on my GitHub.</p>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base>
+  <Posts posts={posts} />
+  <HomePagination />
+</Base>

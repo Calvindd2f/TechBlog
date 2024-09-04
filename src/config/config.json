@@ -1,0 +1,26 @@
+{
+    "site": {
+        "title": "Calvins Blog",
+        "base_url": "https://app-support.com",
+        "base_path": "/",
+        "favicon": "/favicon.png",
+        "logoLight": "/logoLight.png",
+        "logoDark": "/logoDark.png",
+        "lang": "en",
+        "description": "Calvins Blog in Astro and I cannot remember everything else.",
+        "pageSize": 6
+    },
+    "features": {
+        "youtube": false,
+        "dark_mode": true
+    },
+    "metadata": {
+        "meta_author": "Calvin Bergin",
+        "meta_description": "Calvins Blog in Astro and I cannot remember everything else."
+    },
+    "author": {
+        "name": "Calvin Bergin",
+        "avatar": "https://pbs.twimg.com/profile_images/1773425923351588865/wIkaARWd_400x400.jpg",
+        "bio": "Calvins Blog in Astro and I cannot remember everything else."
+    }
+}

@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import Base from "@layouts/Base.astro";
+import Page from "@layouts/Page.astro";
+//import Layout from '../layouts/premigration_BlogPost.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Brief about me followed by a bit more information."
-	pubDate={new Date('August 08 2023')}
-	heroImage="/blog-placeholder-about.jpg"
+<Base meta_title="About",meta_description="Brief about me followed by a bit more information."
 >
+	<Page title="About Me">
+
 	<p>
 		Hello , My name is Calvin or more specifically Calvindd2f on github or Dreadytofat pretty much everywhere else. This blog is primarily for all aspects of technology I am working with as I have ben putting this on the longfinger for far to long and would enjoy reviewing projects/microprojects I've done over the years.
 		I am 23 years old (or born in Dec 2000, if I forget to update this)
@@ -89,4 +89,5 @@ import Layout from '../layouts/BlogPost.astro';
 	<p>
 		
 	</p>
-</Layout>
+	</Page>
+</Base>

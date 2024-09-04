@@ -2,12 +2,33 @@
   "name": "techblog",
   "type": "module",
   "version": "0.0.1",
+  "description": "Calvins open-source blog template, built with Astro, Tailwind CSS, and TypeScript.",
+  "contributors": [
+    {
+      "name": "Calvin Bergin",
+      "email": "C@lvin.ie",
+      "url": "https://app-support.com"
+    }
+  ],
+  "keywords": [
+    "JavaScript",
+    "Astro",
+    "tailwindcss",
+    "typescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Calvindd2f/TechBlog.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "newpost": "astro-md-generator",
+    "format": "prettier -w .",
+    "lint:eslint": "eslint . --ext .js,.ts,.astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
@@ -19,9 +40,27 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
+    "@astrojs/tailwind": "^5.1.0",
     "@shikijs/monaco": "^1.16.1",
     "@shikijs/rehype": "^1.16.1",
     "@shikijs/transformers": "^1.16.1",
-    "shiki": "^1.16.1"
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/typography": "^0.5.15",
+    "@typescript-eslint/eslint-plugin": "^8.4.0",
+    "@typescript-eslint/parser": "^8.4.0",
+    "astro-compressor": "^0.4.1",
+    "astro-md-generator": "^1.0.0",
+    "astro-robots-txt": "^1.0.0",
+    "astro-themes": "^0.2.5",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.9.1",
+    "eslint-plugin-astro": "^1.2.3",
+    "googleapis": "^144.0.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.6",
+    "shiki": "^1.16.1",
+    "tailwindcss": "^3.4.10",
+    "vite-plugin-pwa": "^0.20.3"
   }
 }
