@@ -1,0 +1,40 @@
+name: Upgrade npm packages
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Run weekly on Sunday at midnight
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  upgrade-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # or whichever version you're using
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Upgrade packages
+        run: |
+          npm install -g npm-check-updates
+          ncu -u
+          npm install
+      
+      - name: Run tests
+        run: npm test
+      
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: "chore: upgrade npm packages"
+          title: "Upgrade npm packages"
+          body: |
+            This PR upgrades npm packages to their latest versions.
+            Please review the changes and merge if everything looks good.
+          branch: "upgrade-packages"
+          delete-branch: true
