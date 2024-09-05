@@ -3,6 +3,8 @@ title: Extracting - Importing Intune Configuration Across Multiple Tenants
 description: Exporting Intune Configuration from a dev tenant and deploying agreed upon standards in the client tenant. Also allows a manual backup of Intune env.
 pubDate: Feb 08 2024
 heroImage: /blog-placeholder-3.jpg
+tags: ['Intune','Tenant','Administration','ZTE']
+categories: ['Automation']
 ---
 This post goes over Intune baselines, backup of an intune configuration, creation of baselines within a Microsoft Developer Tenant and exporting that configuration from the dev tenant to import onto a client tenant after discussion. 
 

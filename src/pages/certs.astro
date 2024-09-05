@@ -1,15 +1,12 @@
 ---
-import Layout from '../layouts/premigration_BlogPost.astro';
-import az500 from '/public/az500.jpg';
+import Base from '@layouts/Base.astro';
+import Page from '@layouts/Page.astro';
 import all_certificates from '/public/all_certificates.jpg';
 ---
 
-<Layout
-	title="Certificates"
-	description="Certs I have obtained throughout my career and minor thoughts on them."
-	pubDate={new Date('September 3 2024')}
-	heroImage="/blog-placeholder-about.jpg"
->
+<Base meta_title='Certificates',meta_description='Certs I cert'd'>
+	<Page title="Certificates">
+		<p>
 		Adding all my Microsoft Certificates below as it is too much hassle to screenshot each one and then add a comment on them. 
 		<br>
 		To answer any questions they were [Reverse Chronological] AZ-500,AZ-305,AZ-104,SC-400,MS-102,SC-200 . <br><br>Every single one of them was hard , because Microsoft focus and give priority to the minutia, instead of realistic standards with the exceptions of the SC-400 which gives boregasms to the highest extent. I sat MS-500 twice and failed each time.
@@ -33,8 +30,6 @@ import all_certificates from '/public/all_certificates.jpg';
 		OffSec<br>
 		Issued Oct 2022<br>
 		Credential ID 59857018<br>
-		
-		
 		<br><br><br>CCNA<br>
 		Cisco<br>
 		Issued Sep 2021 · Expired Sep 2024<br>
@@ -58,4 +53,5 @@ import all_certificates from '/public/all_certificates.jpg';
 		<br>
 		<br>
 	</p>
-</Layout>
+	</Page>
+</Base>

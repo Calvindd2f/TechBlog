@@ -3,6 +3,8 @@ title: Invoke-MgGraphRequest - further capabilities
 description: Lorem ipsum dolor sit amet
 pubDate: Jul 07 2024
 heroImage: /blog-powershell.jpg
+tags: ['Graph','Entra','Powershell','Performance','Novel']
+categories: ['Automation']
 ---
 So to add onto the unique abilities of `Invoke-MgGraphRequest` , I have also found out a while after the first win was the unique capabilities of the `OutputType` parameter.
 

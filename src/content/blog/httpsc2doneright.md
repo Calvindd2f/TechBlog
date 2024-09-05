@@ -3,6 +3,8 @@ title: LetsEncrypt Automation in linux + powershell( windows)
 description: httpsc2doneright
 pubDate: Dec 20 2021
 heroImage: /blog-placeholder-1.jpg
+tags: ['SSL','Certificate','LetsEncrypt']
+categories: ['Automation']
 ---
 
 Requires the **domain name required for the certificate** along with the **WAN IP from the server** or VPS or workstation hosting the site.

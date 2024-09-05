@@ -3,6 +3,8 @@ title: Terraform - Creating a Hyper-V provider
 description: Creating a hyperv provider in Terraform
 pubDate: Dec 29 2023
 heroImage: /blog-placeholder-2.jpg
+tags: ['Provider','HyperV','CRUD']
+categories: ['Terraform']
 ---
 
 1. Set up your development environment:

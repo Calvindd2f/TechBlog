@@ -3,6 +3,8 @@ title: Terraform - Unifi WAP/WLAC Configuration
 description: Lorem ipsum dolor sit amet
 pubDate: Sept 1 2024
 heroImage: /ap_heatmap_irrelevant.png
+tags: ['Unifi']
+categories: ['Terraform']
 ---
 
 Here is the Terraform file I use for deploying out Unifi WLAC / APs for clients. There are some fields that need to be check before execution but overall it saves a lot of time / heartache.

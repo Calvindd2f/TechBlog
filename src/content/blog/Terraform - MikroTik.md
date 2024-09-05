@@ -3,6 +3,8 @@ title: Terraform - MikroTik Switch Configuration
 description: Lorem ipsum dolor sit amet
 pubDate: Sept 1 2024
 heroImage: /CRS328-24P.jpg
+tags: ['MikroTik']
+categories: ['Terraform']
 ---
 
 

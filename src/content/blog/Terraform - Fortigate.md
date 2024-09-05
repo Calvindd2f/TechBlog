@@ -3,6 +3,8 @@ title: Terraform - Fortigate Firewall Generic Config WIP
 description: TF Fortinet configuration
 pubDate: Jun 20 2024
 heroImage: /blog-sonar.jpg
+tags: ['Fortigate']
+categories: ['Terraform']
 ---
  
 

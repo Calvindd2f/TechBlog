@@ -10,42 +10,48 @@ import { manifest } from './src/utils/manifest';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://localhost:4322/',
-  image: {
-    remotePatterns: [{ protocol: 'https' }],
-  },
-  markdown: {
-    drafts: true,
-    shikiConfig: {
-      theme: 'material-theme-palenight',
-      wrap: true,
-    },
-  },
-  integrations: [
-    mdx({
-      syntaxHighlight: 'shiki',
-      shikiConfig: {
-        theme: 'material-theme-palenight',
-        wrap: true,
-      },
-      drafts: true,
-    }),
-    compressor({ gzip: true, brotli: true }),
-    sitemap(),
-    tailwind(),
-    robotsTxt(),
-  ],
-  vite: {
-    plugins: [
-      VitePWA({
+	site: 'http://localhost:4322/',
+	image: {
+		remotePatterns: [{ protocol: 'https' }],
+	},
+	markdown: {
+		drafts: true,
+		shikiConfig: {
+			theme: 'material-theme-palenight',
+			wrap: true,
+		},
+	},
+	integrations: [
+		mdx({
+			syntaxHighlight: 'shiki',
+			shikiConfig: {
+				theme: 'material-theme-palenight',
+				wrap: true,
+			},
+			drafts: true,
+		}),
+		compressor({ gzip: true, brotli: true }),
+		sitemap(),
+		tailwind(),
+		robotsTxt(),
+	],
+	devToolbar: {
+		enabled: false
+	},
+	vite: {
+		plugins: [
+			VitePWA({
         registerType: 'autoUpdate',
         manifest,
-        workbox: {
-          globDirectory: 'dist',
-          globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
-          navigateFallback: null,
-        },
-      }),
+				workbox: {
+					globDirectory: 'dist',
+					globPatterns: ['**/*.{js,css,svg,png,jpg,jpeg,gif,webp,woff,woff2,ttf,eot,ico}'],
+					navigateFallback: null,
+				},
+			}),
     ],
-  },
+	},
+	redirects: {
+		'/Blog': '/blog'
+	},
 });

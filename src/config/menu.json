@@ -9,7 +9,7 @@
       "url": "/Blog"
     },
     {
-      "name": "About Me",
+      "name": "About",
       "url": "/about"
     },
     {
@@ -21,8 +21,12 @@
       "url": "/certs"
     },
     {
-      "name": "KBs",
-      "url": "/KB"
+      "name": "Tags",
+      "url": "/tags"
+    },
+    {
+      "name": "Categories",
+      "url": "/categories"
     }
   ]
 }

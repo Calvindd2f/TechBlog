@@ -3,6 +3,8 @@ title: Fileless Injection Analysis - EDR litmus test
 description: Injection fileless
 pubDate: Jan 6 2022
 heroImage: /blog-invoke-ps.jpg
+tags: ['malware','analysis','Inline C#']
+categories: ['Malware']
 ---
 
 This was taken from a Microsoft Defender for Endpoint ATP intro that tests fileless injection. 

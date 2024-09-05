@@ -3,6 +3,8 @@ title: Anisble VPS Automation Github Workflows
 description: Lorem ipsum dolor sit amet
 pubDate: Sept 1 2024
 heroImage: /blog-placeholder-2.jpg
+tags: ['Ansible','Automation','IaC','Git','Workflows']
+categories: ['Automation']
 ---
 
 I have recently been trying to get into the swing of Ansible for Unix Servers a bit more instead of uphill struggle with ansible on windows.  

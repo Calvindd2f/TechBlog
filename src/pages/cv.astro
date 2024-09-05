@@ -1,13 +1,14 @@
 ---
-import Layout from '../layouts/premigration_BlogPost.astro';
+import Base from '@layouts/Base.astro';
+import Page from '@layouts/Page.astro';
+//import Layout from '../layouts/premigration_BlogPost.astro';
 ---
 
-<Layout
-	title="Resume"
-	description="Web format of my CV / Resume"
-	pubDate={new Date('August 30 2024')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		
-</Layout>
+<Base meta_title="Resume" ,meta_description="Website copy of my CV.">
+		<Page title="CV">
+			<p>
+				Some of more unessessary information redacted/witheld. Can be request full copy on LinkedIn.
+			</p>
+		</Page>
+	</Base>
+</Base>
