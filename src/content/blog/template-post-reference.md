@@ -1,6 +1,6 @@
 ---
-title: template-post-reference
-description: Lorem ipsum dolor sit amet
+title: Template for referencing.
+description: Template for refferencing the markdown format to display Astro blog posts properly.
 pubDate: Nov 1 2019
 heroImage: /blog-placeholder-2.jpg
 ---

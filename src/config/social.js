@@ -10,5 +10,10 @@ export default {
       url: 'https://x.com/Calvindd2f',
       svg: '<svg class="transition-all w-6 h-6 cursor-pointer text-zinc-400 hover:text-blue-300 fill-current" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg"><title>X</title><path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"></path></svg>',
     },
+    {
+      name: 'dev.to',
+      url: 'https://dev.to/Calvindd2f',
+      svg: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="24" viewBox="0 0 32 32" width="24"><linearGradient id="a" gradientUnits="userSpaceOnUse" x1="15.908" x2="15.908" y1="3.199" y2="28.854"><stop offset="0" stop-color="#fd556a"/><stop offset="1" stop-color="#aa172a"/></linearGradient><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="16.443" x2="16.443" y1="4.828" y2="26.958"><stop offset="0" stop-color="#ffdc5d"/><stop offset="1" stop-color="#ffcc14"/></linearGradient><path d="M30.216 11.094a7.894 7.894 0 0 0-7.894-7.895 7.88 7.88 0 0 0-6.414 3.303A7.88 7.88 0 0 0 9.494 3.2 7.894 7.894 0 0 0 1.6 11.094c0 .617.078 1.216.213 1.792 1.096 6.81 8.668 13.996 14.095 15.968 5.426-1.972 13-9.157 14.094-15.967a7.796 7.796 0 0 0 .214-1.793z" fill="url(#a)"/><path d="m28.986 20.743-3.06-1.132-1.132-3.06a.8.8 0 0 0-1.501 0L22.16 19.61l-3.06 1.133a.8.8 0 0 0 0 1.5l3.06 1.133 1.133 3.06a.8.8 0 0 0 1.5 0l1.133-3.06 3.06-1.133a.8.8 0 0 0 0-1.5zm-18.4-12.8-1.892-.7-.7-1.892a.8.8 0 0 0-1.501 0l-.701 1.892-1.891.7a.8.8 0 0 0 0 1.5l1.892.7.7 1.892a.8.8 0 0 0 1.5 0l.7-1.892 1.893-.7a.8.8 0 0 0 0-1.5z" fill="url(#b)"/></svg>',
+    },
   ],
 };
