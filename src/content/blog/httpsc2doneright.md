@@ -3,18 +3,16 @@ title: LetsEncrypt Automation in linux + powershell( windows)
 description: httpsc2doneright
 pubDate: Dec 20 2021
 heroImage: /blog-placeholder-1.jpg
-tags: ['SSL','Certificate','LetsEncrypt']
-categories: ['Automation']
 ---
 
 Requires the **domain name required for the certificate** along with the **WAN IP from the server** or VPS or workstation hosting the site.
 
-For context I will be using: `app-support.com`  
+For context I will be using: `app-support.com`
 
-Resolve the WAN IP from the current host by either:  
+Resolve the WAN IP from the current host by either:
 
-**powershell:** `$wanIP=(IRM ipinfo.io/ip)`  
-**unix:** `wan='curl ipinfo.io/ip'`  
+**powershell:** `$wanIP=(IRM ipinfo.io/ip)`
+**unix:** `wan='curl ipinfo.io/ip'`
 
 **httpsc2doneright.sh**
 ```sh
@@ -277,4 +275,79 @@ New-PACertificate $env:WildcardorDomain -AcceptTOS -Contact $env:ContactEmail -D
 $Trigger = New-ScheduledTaskTrigger -At 10:00am -Daily
 $Action = New-ScheduledTaskAction -Execute 'PowerShell.exe' -Argument "$env:HOMEDRIVE\Cert\AutoRenewal.ps1"
 Register-ScheduledTask -TaskName 'Certificate AutoRenewal' -Trigger $Trigger -User "$env:USERDOMAIN\$env:USERNAME" -Password '<password>' -Action $Action -RunLevel Highest -Force
+```
+
+For `PowerShell` what I did was:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process; Install-Module -Name 'Posh-ACME' -Scope CurrentUser;Import-Module -Name Posh-ACME;$env:WildcardDomain ='app-support.com';$env:ContactEmail = 'C@lvin.ie';$env:PluginArgs = @{ACMEServer = 'auth.acme-dns.io'}
+
+# Crate request
+New-PACertificate $env:WildcardDomain -AcceptTOS -Contact $env:ContactEmail -PluginArgs @{'ACMEServer'='auth.acme-dns.io'}
+
+[console]::writeline('THIS IS FILLER, I CHANGED THE DNS RECORDS MANUALLY.')
+
+Get-PACertificate|fl
+```
+```
+Subject       : CN=app-support.com
+NotBefore     : 06/09/2024 03:26:02
+NotAfter      : 05/12/2024 02:26:01
+KeyLength     : 2048
+Thumbprint    : 31C4E1F8BAA0736E284BCD4FA91803457509308E
+ARIId         : u7zDR6XkvKnGw6RyDBCNojXhyOg.BAgUoqhClNI_bsGZ05x8WuwY
+Serial        : 351198831787135205348586429280691318090776
+AllSANs       : {app-support.com}
+CertFile      : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\cert.cer
+KeyFile       : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\cert.key
+ChainFile     : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\chain.cer
+FullChainFile : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\fullchain.cer
+PfxFile       : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\cert.pfx
+PfxFullChain  : C:\Users\c\AppData\Local\Posh-ACME\LE_PROD\1928734016\app-support.com\fullchain.pfx
+PfxPass       : System.Security.SecureString
+```
+
+I completely forgot the Pfx pass... or if I was even asked - after the certificate was created.
+
+I am going to shill my newer blog post - `C# custom PSScriptAnalyzerRules` to showcase how to display the credential even though it is a `System.Security.SecureString` type.
+
+```powershell
+$pass=(Get-PACertificate).PfxPass
+$heroin=[Runtime.InteropServices.Marshal]::SecureStringToBSTR($pass)
+[Runtime.InteropServices.Marshal]::PtrToStringBSTR($heroin)
+#NSFW OUTPUT
+```
+
+After seeing the password generated *(There is no prompt for you to define it)* and how there wasn't even a half assed attempt at using at bare minimum `Get-Random` , I configured wsl under `.wslconfig` to take the IP address of my host machine and did the unix version at the top.
+
+I am not even going to humor the task manager automation because I do not recommend creating a certificate with a shit password like this.
+
+------------------
+
+#### How I added this to my Astro Website
+
+Astro uses the Vite engine, the application of SSL cert is easy. Very easy.
+
+Install the plugin:
+
+`npm install --save @vitejs/plugin-basic-ssl`
+
+Add the plugin via pass-thru in Astro config:
+
+```astro
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
+export default defineConfig({
+  vite: {
+    plugins: [ basicSsl() ]
+  }
+})
+```
+
+I’ve also added an additional host tag in my dev startup
+
+```json
+"scripts":{
+	"dev": "astro dev --host"
+}
 ```
