@@ -3,18 +3,15 @@ title: Binary PowerShell Cmdlets
 description: Binary PS Cmdlets
 pubDate: Sept 3 2024
 heroImage: /blog-invoke-ps.jpg
-tags: 
-categories: "['PowerShell']"
+tags: ['PowerShell']
+categories: ['C#']
 ---
 
-What I use for referencing the standards [powershell cmdlets developer link](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet) 
-
-
+What I use for referencing the standards [powershell cmdlets developer link](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet)
 
 I thought I'd expand upon doing binary powershell modules with an example from someone experienced in C# creating a powershell function for invocation of a scriptblock with retries.
 
-While this does not look like something I would need, or be particularly arsed with. `(dotnet used everywhere but the cmdlet calls, not very useful)` I just wanted to highlight the ability to port over dotnet features via a binary module. Here is the original. 
-
+While this does not look like something I would need, or be particularly arsed with. `(dotnet used everywhere but the cmdlet calls, not very useful)` I just wanted to highlight the ability to port over dotnet features via a binary module. Here is the original.
 
 ```powershell
 function Invoke-ScriptBlockWithRetries {
@@ -99,11 +96,9 @@ function Invoke-ScriptBlockWithRetries {
 }
 ```
 
-
 No comment.
-Anyways in the discussion about this someone one mentioned the error handling C# package polly. 
-I recreated the funciton as a binary CMDlet in C# then compiled and tested. 
-
+Anyways in the discussion about this someone one mentioned the error handling C# package polly.
+I recreated the funciton as a binary CMDlet in C# then compiled and tested.
 
 **Invoke-ScriptBlockWithRetries.cs**
 
@@ -202,6 +197,7 @@ namespace RetryModule
 ```
 
 **MyNewModule.csproj**
+
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
 
@@ -220,7 +216,7 @@ namespace RetryModule
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-  
+
   <Target Name="CopyDLLs" AfterTargets="Build">
   <ItemGroup>
   <DllsToCopy Include="$(TargetDir)*.dll" />
@@ -230,12 +226,11 @@ namespace RetryModule
 </Project>
 ```
 
-
 To those who feel left out from not quite understanding C#, it is quite easy when using .NET via powershell.
 
 I will leave a afterthought of an attempt to do this the odd way.
 
-First of all, I will create a function for loading the package DLL via (I know, I know, Slow as fuck method) reflection. 
+First of all, I will create a function for loading the package DLL via (I know, I know, Slow as fuck method) reflection.
 
 If you are already bored to death, this will probably be the only function you may make use of in future.
 
@@ -312,7 +307,6 @@ Function LoadNETdll
     }
 }
 ```
-
 
 #### Here is the Polly implementation function in PowerShell - no C#
 
