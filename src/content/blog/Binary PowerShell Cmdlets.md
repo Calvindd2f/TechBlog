@@ -3,8 +3,8 @@ title: Binary PowerShell Cmdlets
 description: Binary PS Cmdlets
 pubDate: Sept 3 2024
 heroImage: /blog-invoke-ps.jpg
-tags: ['C#','PowerShell','Performance']
-categories: ['Automation']
+tags: 
+categories: "['PowerShell']"
 ---
 
 What I use for referencing the standards [powershell cmdlets developer link](https://learn.microsoft.com/en-us/powershell/scripting/developer/cmdlet) 

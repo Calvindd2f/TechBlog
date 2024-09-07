@@ -4,35 +4,22 @@
     "type": "split",
     "children": [
       {
-        "id": "bc8f82c9bd7cd1bf",
+        "id": "eaf64bd19af13a31",
         "type": "tabs",
         "children": [
           {
-            "id": "3ae8328b66fe835c",
+            "id": "2fb073b248e5706c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "API Creation - Notes for tf providers.md",
+                "file": "Custom PSScriptAnalyzer rules.md",
                 "mode": "preview",
                 "source": false
               }
             }
-          },
-          {
-            "id": "b7581b139cf44e17",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PowerShell Orchestrator.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -86,11 +73,12 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 453.5
   },
   "right": {
     "id": "18af2e3e5ac227f9",
@@ -106,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PowerShell Orchestrator.md",
+                "file": "Custom PSScriptAnalyzer rules.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PowerShell Orchestrator.md",
+                "file": "Custom PSScriptAnalyzer rules.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PowerShell Orchestrator.md"
+                "file": "Custom PSScriptAnalyzer rules.md"
               }
             }
           }
@@ -168,36 +156,43 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "b7581b139cf44e17",
+  "active": "2fb073b248e5706c",
   "lastOpenFiles": [
-    "template-post-reference.md",
-    "Lotto Posting.md",
-    "API Creation - Notes for tf providers.md",
-    "Binary PowerShell Cmdlets.md",
-    "AGPTs stock capabilities.md",
-    "PowerShell Orchestrator.md",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
-    "httpsc2doneright.md",
-    "Port forwarding residential DSL modem..md",
-    "Extracting - Importing Intune Configuration Across Multiple Tenants.md",
-    "Terraform - Fortigate.md",
-    "Golden Image GitOps Pipeline with Ansible Platform.md",
-    "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
+    "Some useful PowerShell functions.md",
+    "Containerizing Unifi Wireless LAN Controller in Docker.md",
     "Containerizing Unifi Wireless LAN Controller on Linux.md",
+    "Binary PowerShell Cmdlets.md",
+    "API Creation - Notes for tf providers.md",
     "Anisble VPS Automation Github Workflows.md",
+    "AGPTs stock capabilities.md",
     "Terraform - Unifi.md",
     "Terraform - MikroTik.md",
     "Terraform - HyperV.md",
-    "C# - Binary PowerShell ModulesCMDlets.md",
-    "Rooting and porting Nethunter + Kernel to RN7.md",
+    "Terraform - Fortigate.md",
+    "template-post-reference.md",
+    "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
     "SonarQube PowerShell Plugin - Initial Setup.md",
     "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
-    "markdown-style-guide.md",
+    "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
+    "Rooting and porting Nethunter + Kernel to RN7.md",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "PowerShell Orchestrator.md",
+    "PowerShell Deep Shit - Error Handling.md",
+    "PowerShell Deep Shit - Dependency Injection.md",
+    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
+    "Port forwarding residential DSL modem..md",
+    "Power of Terraform Modules.md",
     "OSWP - Pineapple scripts.md",
-    "Invoke-MgGraphRequest - further capabilities.md",
-    "Invoke-MgGraphRequest - A Novel Approach.md",
-    "Pasted image 20240829204750.png",
+    "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
+    "Tags/#c",
+    "Tags/#mikrotik",
+    "Tags/#unifi",
+    "Tags/#golden image",
+    "Tags/#ansible",
+    "Tags/#gitops",
+    "Tags/#inline c",
     "Tags",
+    "Pasted image 20240829204750.png",
     "Pasted image 20240901201651.png",
     "Pasted image 20240901201206.png",
     "Pasted image 20240901201044.png",

@@ -44,8 +44,7 @@
   "showRibbon": true,
   "deleteFileOption": "trash",
   "expandedSpaces": [
-    "/",
-    "//Tags"
+    "/"
   ],
   "expandFolderOnClick": true,
   "menuTriggerChar": "/",

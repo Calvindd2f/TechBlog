@@ -22,7 +22,7 @@ Just as a note I will be using Zig from WSL despite having the binaries on Windo
 
 **LogUtil.h**
 
-```h
+```cpp
 #ifndef LOGUTIL_H
 #define LOGUTIL_H
 
