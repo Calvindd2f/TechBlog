@@ -22,9 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-autorun.ps1
 src/content/blog/.makemd/*
 src/content/blog/.space/*
 src/content/blog/.trash/*
 src/content/blog/Tags/*
 src/content/blog/.obsidian/*
+app-support.cer
+scripts/background.js
+scripts/content_Script.js
+scripts/JavaScriptCulture.js

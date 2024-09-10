@@ -9,7 +9,7 @@ export default {
       /** custom trust domains */
       domains: ['app-support.com'],
       /** custom certification directory */
-      certDir: 'C:\\Users\\c\\app-support.cer',
+      certDir: '/app-support.cer',
     }),
   ],
 };

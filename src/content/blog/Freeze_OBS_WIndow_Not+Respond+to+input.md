@@ -1,0 +1,47 @@
+---
+title: Freeze OBS in Windows and prevent it from responding to mouse input
+description: Freeze OBS in Windows and prevent it from responding to mouse input
+pubDate: Aug 16 2024
+heroImage: /blog-invoke-ps.jpg
+tags: ['OBS', 'Freeze', 'Mouse', 'Input', 'Process Manipulation']
+categories: ['OBS']
+---
+
+
+
+
+```powershell
+Add-Type -TypeDefinition @"
+    using System;
+    using System.Runtime.InteropServices;
+
+    public class User32 {
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        public const int GWL_STYLE = -16;
+        public const int WS_DISABLED = 0x8000000;
+    }
+"@ 
+
+###[might need to adjust the window title accordingly - I'm not fucked making it modular]###
+$hWnd = [User32]::FindWindow([NullString]::Value, "OBS 29.1.3 - Profile: Untitled - Scenes: Untitled")
+
+if ($hWnd -ne [IntPtr]::Zero) {
+    $style = [User32]::GetWindowLong($hWnd, [User32]::GWL_STYLE)
+    [User32]::SetWindowLong($hWnd, [User32]::GWL_STYLE, ($style -bor [User32]::WS_DISABLED))
+} else {
+    Write-Host "obd window not found!"
+}
+
+###[Copy & Paste & Execute in pwsh to re-enable]###
+<#
+    [User32]::SetWindowLong($hWnd, [User32]::GWL_STYLE, ($style -band (-bnot [User32]::WS_DISABLED)))
+#>
+```

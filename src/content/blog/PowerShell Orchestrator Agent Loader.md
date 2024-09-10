@@ -1,0 +1,247 @@
+---
+title: PowerShell Execution Engine Agent Loader Script
+description: PowerShell script to install and configure the orchestrator agent
+pubDate: Sept 09 2024
+heroImage: /blog-invoke-ps.jpg
+tags: ['Orchestration', 'C#', 'PowerShell', 'Deployment', 'Certificates']
+categories: ['Automation']
+---
+
+
+```powershell
+<#  agent loader :: 10.09.2024 build 2
+   for support, please contact c@app-support.com #>
+
+Function Agent(){
+    Param(
+        [Parameter(ValueFromPipelineByPropertyName = $False)]
+        [AllowNull()]
+        [switch]$install,
+        [Parameter(ValueFromPipelineByPropertyName = $False)]
+        [AllowNull()]
+        [switch]$reinstall,
+        [Parameter(ValueFromPipelineByPropertyName = $False)]
+        [AllowNull()]
+        [switch]$uninstall,
+        [Parameter(ValueFromPipelineByPropertyName = $False)]
+        [AllowNull()]
+        [switch]$clearcert,
+        [Parameter(Mandatory=$true)]
+        [string]$tenanturl,
+        [Parameter(ValueFromPipelineByPropertyName = $True)]
+        [AllowNull()]
+        [int]$clientid
+    )
+
+    #Ignore SSL errors
+    If ($Null -eq ([System.Management.Automation.PSTypeName]'TrustAllCertsPolicy').Type) {
+        Add-Type -Debug:$False @"
+            using System.Net;
+            using System.Security.Cryptography.X509Certificates;
+            public class TrustAllCertsPolicy : ICertificatePolicy {
+                public bool CheckValidationResult(
+                    ServicePoint srvPoint, X509Certificate certificate,
+                    WebRequest request, int certificateProblem) {
+                    return true;
+                }
+            }
+"@
+    }
+    [System.Net.ServicePointManager]::CertificatePolicy = New-Object TrustAllCertsPolicy
+
+    #Enable TLS, TLS1.1, TLS1.2, TLS1.3 in this session if they are available
+    IF([Net.SecurityProtocolType]::Tls) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls}
+    IF([Net.SecurityProtocolType]::Tls11) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls11}
+    IF([Net.SecurityProtocolType]::Tls12) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12}
+    IF([Net.SecurityProtocolType]::Tls13) {[Net.ServicePointManager]::SecurityProtocol=[Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls13}
+
+    ## Test Connection to Tenant
+    try{
+        $test = New-Object System.Net.Sockets.TcpClient;
+        $test.Connect($tenanturl, 443);
+        $test.Dispose();
+        Write-Host "$tenanturl is reachable"
+    }catch{
+        $test.Dispose()
+        Write-Warning "$tenanturl is unreachable. Exiting."
+        exit;
+    }
+
+    $agent = Check-Agent
+    if(![string]::IsNullOrEmpty($($agent.path))){
+        if(Test-Path $($agent.path) -ea SilentlyContinue){
+            Write-Log "Installed Version: $((Get-ItemProperty -Path $($agent.path)).VersionInfo.FileVersionRaw.Tostring())" -show
+        }
+    }
+    $agentURL = 'https://app-support.blob.core.windows.net/share/agent/OrchestratorAgentService.exe'
+    $outfile = 'C:\Windows\Temp\OrchestratorAgentService.exe'
+
+    if($install -and !$uninstall -and !$reinstall -and $($agent.status) -eq $null){
+        Write-Log "Installing" -show
+        Install-Agent
+        Check-Service
+    }
+    if(!$install -and $uninstall -and !$reinstall -and $($agent.status) -ne $null){
+        Write-Log "Uninstalling" -show
+        Uninstall-Agent
+    }
+    if(!$install -and !$uninstall -and $reinstall){
+        Write-Log "Reinstalling" -show
+        Reinstall-Agent
+        Check-Service
+    }
+    CleanUp-Install
+}
+
+Function Write-Log([string]$log,[switch]$show){
+    [string]$logtime = $((Get-Date -Format "[dd/MM/yyyy HH:mm:ss zz] |").ToString())
+    foreach($line in $($log -split "`n")){
+        if($VerbosePreference -eq 'Continue' -or $show -eq $true){Write-Host "$logtime $line"}
+      Add-Content -Path "C:\Windows\Temp\agent.log" -Value "$logtime $line"
+    }
+}
+
+Function Install-Agent(){
+    $result = Download-Agent
+    $exeArgs = if(![string]::IsNullOrEmpty($clientid) -and $clientid -ne 0){"-install -tenantname $tenanturl -clientid $clientid"}else{"-install -tenantname $tenanturl"}
+    if($result){Launch-Executable -exepath $outfile -arguments $exeArgs}
+}
+
+Function Uninstall-Agent(){
+    [int]$retry = 0
+    do{
+        $ServicePath = (Get-ChildItem $(Join-Path $(Split-Path $($agent.path) -Parent) "\*") -Include "*Orchestrator.AgentServiceInstaller.exe").FullName
+        if(Test-Path $ServicePath){
+            if($clearcert){
+                Launch-Executable -exepath $ServicePath -arguments '-uninstall -clearcertificate true'
+            }else{
+                Launch-Executable -exepath $ServicePath -arguments '-uninstall -clearcertificate false'
+            }
+        }else{
+            Write-Log "Agent not installed to uninstall"
+        }
+        Start-Sleep -Seconds 5
+        if($retry -eq 3){Write-Log "Failed to uninstall after 3 retries. Force Closing the Agent.";End-ServiceExe;}
+        if($retry -eq 10){Write-Log "Failed to uninstall after 10 retries"; break;}else{$retry++}
+    }while((Check-Agent).status -ne $null)
+}
+
+Function Reinstall-Agent(){
+    $result = Download-Agent
+    if($($agent.status) -ne $null){
+        Uninstall-Agent
+        Start-Sleep -Seconds 15
+    }
+    Install-Agent
+}
+
+Function End-ServiceExe(){
+    $procs = @()
+    $procs += Get-Process -Name .OrchestratorAgent
+    foreach($proc in $procs){
+        Stop-Process -Id $($proc.Id) -Force | Out-Null
+    }
+}
+
+Function Download-Agent(){
+    try{
+        $webclient = New-Object System.Net.WebClient
+        $webclient.DownloadFile($agentURL, $outfile)
+        $webclient.Dispose()
+        return $true;
+    } catch {
+        Write-Log "Failed to download." -show
+        return $false;
+    }
+
+    try {
+        $varChain = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Chain
+        $varChain.Build((Get-AuthenticodeSignature -FilePath "OrchestratorAgentService.exe").SignerCertificate) | out-null
+        $varIntermediate=($varChain.ChainElements | ForEach-Object {$_.Certificate} | Where-Object {$_.Subject -match "Sectigo Public Code Signing CA EV R36"}).Thumbprint
+        if ($varIntermediate -ne '0185FF9961FF0AA2E431817948C28E83D3F3EC70') {throw}
+        write-host "- Digital Signature verification passed."
+    } catch {
+        write-host "! ERROR: Could not validate digital signature. Please allowlist $agentURL."
+        exit 1
+    }
+}
+
+Function Launch-Executable([string]$exepath, [string]$arguments){
+    try {
+        Write-Log "Launching: $exepath $arguments"
+        $processInfo = new-Object System.Diagnostics.ProcessStartInfo($exepath);
+        $processInfo.Arguments = $arguments;
+        $processInfo.Verb = 'RunAs'
+        $processInfo.CreateNoWindow = $true;
+        $processInfo.RedirectStandardOutput = $true;
+        $processInfo.RedirectStandardError = $true;
+        $processInfo.UseShellExecute = $false;
+        $processInfo.LoadUserProfile = $false;
+        $processInfo.WindowStyle = 'Hidden';
+
+        $process = New-Object System.Diagnostics.Process
+        $process.StartInfo = $processInfo
+        $process.Start() | Out-Null
+        $process.WaitForExit()
+
+        [string]$output = $($process.StandardOutput.ReadToEnd().ToString()) -split "`n"
+        #[string]$error = $($process.StandardError.ReadToEnd().ToString()) -split "`n"
+        Write-Log $output
+        #Write-Log $error -show
+
+        if($($process.ExitCode) -eq '0'){
+            Write-Log "Success" -show
+        } else {
+            Write-Log "Failed with Exit Code $($process.ExitCode)" -show
+        }
+        return;
+    } catch {
+        Write-Log $($_.Exception.Message)
+    }
+}
+
+Function Check-Agent(){
+    $Service = Get-WmiObject Win32_Service -Filter "Name='OrchestratorAgent'"
+    return [pscustomobject]@{
+        status = if($($Service.State)){$($Service.State)}else{$null}
+        path = $($Service.PathName)
+    }
+}
+
+Function Check-Service(){
+    Start-Sleep -Seconds 3
+    if((Check-Agent).status -eq 'Stopped'){
+        try{
+            Start-Service 'OrchestratorAgent'
+            Write-Log "Service started" -show
+        } catch {
+            Write-Log "Failed to start service" -show
+        }
+    }
+}
+
+Function CleanUp-Install(){
+    if(Test-Path $outfile){
+        Remove-Item $outfile -Force
+    }
+}
+
+switch($env:executionMode){
+    'install' {
+        Agent -install -clearcert:$([bool]::Parse($env:clearcertificate)) -clientid $env:_clientid -tenanturl $env:tenanturl -Verbose
+    }
+    'uninstall' {
+        Agent -uninstall -clearcert:$([bool]::Parse($env:clearcertificate)) -clientid $env:_clientid -tenanturl $env:tenanturl -Verbose
+    }
+    'reinstall' {
+        Agent -reinstall -clearcert:$([bool]::Parse($env:clearcertificate)) -clientid $env:_clientid -tenanturl $env:tenanturl -Verbose
+    }
+}
+```
+
+
+```powershell
+	[switch]$executionmode='install'      # Choose execution mode.
+	[string]$tenanturl=$null           # Your tenant FQDN
+	[bool]$clearcertificate=$false     # Clear unique agent certificate from machine during execution
+```

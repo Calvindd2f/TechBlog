@@ -156,8 +156,11 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "2fb073b248e5706c",
+  "active": "4329a93bf554189a",
   "lastOpenFiles": [
+    "Freeze_OBS_WIndow_Not+Respond+to+input.md",
+    "Freeze_OBS_WIndow_Not+Respond+to",
+    "PowerShell Orchestrator Agent Loader.md",
     "Making WSL use your host IP.md",
     "Live walkthrough of PowerShell refactoring.md",
     "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
@@ -183,8 +186,6 @@
     "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
     "Rooting and porting Nethunter + Kernel to RN7.md",
     "Rewriting ExchangeOnlineManagemenet in CSharp.md",
-    "PowerShell Orchestrator.md",
-    "PowerShell Deep Shit - Error Handling.md",
     "Tags/#c",
     "Tags/#mikrotik",
     "Tags/#unifi",
