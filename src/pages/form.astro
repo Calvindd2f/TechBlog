@@ -1,0 +1,54 @@
+---
+import Base from '@layouts/Base.astro';
+import DynamicForm from '../components/DynamicForm';
+
+// This could come from an API or a local file
+const schema = {
+    type: "object",
+    properties: {
+    name: {
+        type: "string",
+        minLength: 3
+    },
+    email: {
+        type: "string",
+        format: "email"
+    }
+},
+required: ['email']
+};
+
+const uiSchema = {
+    type: "VerticalLayout",
+    elements: [
+    {
+        type: "Control",
+        scope: "#/properties/name"
+    },
+    {
+        type: "Control",
+        scope: "#/properties/email"
+    }
+]
+};
+
+const initialData = {};
+
+const handleSubmit = (data) => {
+    console.log('Form submitted:', data);
+    // Handle
+};
+---
+
+<Base title="Dynamic Form">
+    <main>
+        <h1>Dynamic Form</h1>
+        <DynamicForm
+        client:load
+        schema={schema}
+        uiSchema={uiSchema}
+        data={initialData}
+        onSubmit={handleSubmit}
+        />
+    </main>
+</Base>

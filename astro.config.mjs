@@ -8,6 +8,8 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 import { manifest } from './src/utils/manifest';
 
+import react from '@astrojs/react';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'http://localhost:4321/',
@@ -21,20 +23,14 @@ export default defineConfig({
       wrap: true,
     },
   },
-  integrations: [
-    mdx({
-      syntaxHighlight: 'shiki',
-      shikiConfig: {
-        theme: 'material-theme-palenight',
-        wrap: true,
-      },
-      drafts: true,
-    }),
-    compressor({ gzip: true, brotli: true }),
-    sitemap(),
-    tailwind(),
-    robotsTxt(),
-  ],
+  integrations: [mdx({
+    syntaxHighlight: 'shiki',
+    shikiConfig: {
+      theme: 'material-theme-palenight',
+      wrap: true,
+    },
+    drafts: true,
+  }), compressor({ gzip: true, brotli: true }), sitemap(), tailwind(), robotsTxt(), react()],
   devToolbar: {
     enabled: true,
   },
