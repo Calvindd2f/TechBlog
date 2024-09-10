@@ -1,7 +1,7 @@
 ---
 title: Creating a log utility in C++ compiled using Zig (Then ported to C# via CLR)
 description: Porting over my infamous LogUtil which I used in C#.
-pubDate: Jul 2 2024
+pubDate: Jul 02 2024
 heroImage: /blog-placeholder-3.jpg
 tags: ['Zig', 'C#', 'C++', 'Drop-in compiler', 'logs', 'logutil', 'log performance','PowerShell']
 categories: ['Logging']
