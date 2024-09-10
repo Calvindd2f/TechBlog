@@ -8,8 +8,6 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 import { manifest } from './src/utils/manifest';
 
-import vue from '@astrojs/vue';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'http://localhost:4321/',
