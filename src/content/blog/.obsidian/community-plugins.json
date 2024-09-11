@@ -2,5 +2,8 @@
   "obsidian-hover-editor",
   "auto-reading-mode",
   "obsidian-excalidraw-plugin",
-  "make-md"
+  "make-md",
+  "shiki-highlighter",
+  "explorer-hider",
+  "obsidian-advanced-codeblock"
 ]

@@ -1,4 +1,4 @@
 {
   "timeout": 15,
-  "isReadingModeOnStartup": true
+  "isReadingModeOnStartup": false
 }

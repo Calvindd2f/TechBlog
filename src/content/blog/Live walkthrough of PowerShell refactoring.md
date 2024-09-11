@@ -115,9 +115,226 @@ if (! $myWindowsPrincipal.IsInRole($adminRole))
 ```
 
 ```powershell
+function CisPriv_chk {
+   begin {
+    $5SID = 'S-1-5-114'; # Local account and member of Administrators group
+    $5Group = 'S-1-5-32-544'; # Administrators group ; member of...
+    $DA = '512'               # No other SID in the Domain has 512 in the SID, also there is RNG depending on name in middle.
+    $SID = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+   }
+   process {
+    if ($SID.IsSystem)
+    {
+        [console]::writeline('The current user is a system/service account')
+    }
+    elseif ($SID.Claims.Value -contains $5SID)
+    {
+        [console]::writeline('The current user is a local account and member of the Administrators group')
+    }
+    elseif ($SID.Claims.Value -contains $5Group)
+    {
+        [console]::writeline('The current user is a member of the Administrators group')
+    }
+    elseif ($SID.Claims.Value -contains $DA)
+    {
+        [console]::writeline('The current user is a member of the Domain Administrators group')
+    }
+    else
+    {
+        [console]::writeline('The current user does not have the required permissions')
+        [console]::writeline('Restarting Tiny11 image creator as admin in a new window, do not close this window - it will close itself.')
+        [void] Start-Process -FilePath 'PowerShell' -Verb 'runas' -ArgumentList "-File '$PSScriptRoot\script.ps1'"
+        [void] Wait-Process -Name 'PowerShell'
+    }
+   }
+   end {
+    # Cleanup variables for memory managment.
+    [void] (Remove-Variable $5SID)
+    [void] (Remove-Variable $5Group)
+    [void] (Remove-Variable $DA)
+    [void] (Remove-Variable $SID)
+    [gc]::Collect();
+    exit
+   }
+}
+```
+--------------------------------------
+
+```powershell
+Start-Transcript -Path "$PSScriptRoot\tiny11.log"
+# Ask the user for input
+Write-Host "Welcome to tiny11 core builder! BETA 05-06-24"
+Write-Host "This script generates a significantly reduced Windows 11 image. However, it's not suitable for regular use due to its lack of serviceability - you can't add languages, updates, or features post-creation. tiny11 Core is not a full Windows 11 substitute but a rapid testing or development tool, potentially useful for VM environments."
+Write-Host "Do you want to continue? (y/n)"
+$input = Read-Host
+
+if ($input -eq 'y') {
+    Write-Host "Off we go..."
+Start-Sleep -Seconds 3
+Clear-Host
 ```
 
+I kept the transcript in along with the display notice. I also removed the interactive prompt, because obviously - if they had gotten this far, they do in fact want to continue.
 
+```powershell
+[void] (Start-Transcript -Path "$PSScriptRoot\tiny11.log")
+[console]::writeline("Welcome to tiny11 core builder! BETA 05-06-24")
+[console]::writeline("This script generates a significantly reduced Windows 11 image. However, it's not suitable for regular use due to its lack of serviceability - you can't add languages, updates, or features post-creation. tiny11 Core is not a full Windows 11 substitute but a rapid testing or development tool, potentially useful for VM environments.")
+```
+
+---------------------------------
+
+```powershell
+$mainOSDrive = $env:SystemDrive
+$hostArchitecture = $Env:PROCESSOR_ARCHITECTURE
+New-Item -ItemType Directory -Force -Path "$mainOSDrive\tiny11\sources" >null
+$DriveLetter = Read-Host "Please enter the drive letter for the Windows 11 image"
+$DriveLetter = $DriveLetter + ":"
+
+if ((Test-Path "$DriveLetter\sources\boot.wim") -eq $false -or (Test-Path "$DriveLetter\sources\install.wim") -eq $false) {
+    if ((Test-Path "$DriveLetter\sources\install.esd") -eq $true) {
+        Write-Host "Found install.esd, converting to install.wim..."
+        &  'dism' '/English' "/Get-WimInfo" "/wimfile:$DriveLetter\sources\install.esd"
+        $index = Read-Host "Please enter the image index"
+        Write-Host ' '
+        Write-Host 'Converting install.esd to install.wim. This may take a while...'
+        & 'DISM' /Export-Image /SourceImageFile:"$DriveLetter\sources\install.esd" /SourceIndex:$index /DestinationImageFile:"$mainOSDrive\tiny11\sources\install.wim" /Compress:max /CheckIntegrity
+    } else {
+        Write-Host "Can't find Windows OS Installation files in the specified Drive Letter.."
+        Write-Host "Please enter the correct DVD Drive Letter.."
+        exit
+    }
+}
+
+Write-Host "Copying Windows image..."
+Copy-Item -Path "$DriveLetter\*" -Destination "$mainOSDrive\tiny11" -Recurse -Force > null
+Set-ItemProperty -Path "$mainOSDrive\tiny11\sources\install.esd" -Name IsReadOnly -Value $false > $null 2>&1
+Remove-Item "$mainOSDrive\tiny11\sources\install.esd" > $null 2>&1
+Write-Host "Copy complete!"
+Start-Sleep -Seconds 2
+Clear-Host
+Write-Host "Getting image information:"
+&  'dism' '/English' "/Get-WimInfo" "/wimfile:$mainOSDrive\tiny11\sources\install.wim"
+$index = Read-Host "Please enter the image index"
+Write-Host "Mounting Windows image. This may take a while."
+$wimFilePath = "$($env:SystemDrive)\tiny11\sources\install.wim" 
+& takeown "/F" $wimFilePath 
+& icacls $wimFilePath "/grant" "$($adminGroup.Value):(F)"
+try {
+    Set-ItemProperty -Path $wimFilePath -Name IsReadOnly -Value $false -ErrorAction Stop
+} catch {
+    # This block will catch the error and suppress it.
+}
+New-Item -ItemType Directory -Force -Path "$mainOSDrive\scratchdir" > $null
+& dism /English "/mount-image" "/imagefile:$($env:SystemDrive)\tiny11\sources\install.wim" "/index:$index" "/mountdir:$($env:SystemDrive)\scratchdir"
+
+$imageIntl = & dism /English /Get-Intl "/Image:$($env:SystemDrive)\scratchdir"
+$languageLine = $imageIntl -split '\n' | Where-Object { $_ -match 'Default system UI language : ([a-zA-Z]{2}-[a-zA-Z]{2})' }
+
+if ($languageLine) {
+    $languageCode = $Matches[1]
+    Write-Host "Default system UI language code: $languageCode"
+} else {
+    Write-Host "Default system UI language code not found."
+}
+
+$imageInfo = & 'dism' '/English' '/Get-WimInfo' "/wimFile:$($env:SystemDrive)\tiny11\sources\install.wim" "/index:$index"
+$lines = $imageInfo -split '\r?\n'
+
+foreach ($line in $lines) {
+    if ($line -like '*Architecture : *') {
+        $architecture = $line -replace 'Architecture : ',''
+        # If the architecture is x64, replace it with amd64
+        if ($architecture -eq 'x64') {
+            $architecture = 'amd64'
+        }
+        Write-Host "Architecture: $architecture"
+        break
+    }
+}
+
+if (-not $architecture) {
+    Write-Host "Architecture information not found."
+}
+```
+
+```powershell
+$mainOSDrive = $env:SystemDrive
+$hostArchitecture = $Env:PROCESSOR_ARCHITECTURE
+[void](New-Item -ItemType Directory -Force -Path "$mainOSDrive\tiny11\sources")
+$DriveLetter = Read-Host "Please enter the drive letter for the Windows 11 image"
+$DriveLetter = $DriveLetter + ":"
+
+if ((Test-Path "$DriveLetter\sources\boot.wim") -eq $false -or (Test-Path "$DriveLetter\sources\install.wim") -eq $false) {
+    if ((Test-Path "$DriveLetter\sources\install.esd") -eq $true) {
+        [console]::writeline("Found install.esd, converting to install.wim...")
+        [void](&  'dism' '/English' "/Get-WimInfo" "/wimfile:$DriveLetter\sources\install.esd")
+        $index = Read-Host "Please enter the image index"
+        [console]::writeline(" ")
+        [console]::writeline("Converting install.esd to install.wim. This may take a while...")
+        [void](& 'DISM' /Export-Image /SourceImageFile:"$DriveLetter\sources\install.esd" /SourceIndex:$index /DestinationImageFile:"$mainOSDrive\tiny11\sources\install.wim" /Compress:max /CheckIntegrity)
+    } else {
+        [console]::writeline("Can't find Windows OS Installation files in the specified Drive Letter..")
+        [console]::writeline("Please enter the correct DVD Drive Letter..")
+        [void] (Read-Host)
+        exit
+    }
+}
+
+[console]::writeline("Copying Windows image...")
+[void](Copy-Item -Path "$DriveLetter\*" -Destination "$mainOSDrive\tiny11" -Recurse -Force)
+[void](Set-ItemProperty -Path "$mainOSDrive\tiny11\sources\install.esd" -Name IsReadOnly -Value $false)
+[void](Remove-Item "$mainOSDrive\tiny11\sources\install.esd")
+[console]::writeline("Copy complete!")
+# ENDOF ------------------------------------------------------------------------
+Start-Sleep -Seconds 2
+Clear-Host
+# BEGIN ------------------------------------------------------------------------
+[console]::writeline("Getting image information:")
+[void](&  'dism' '/English' "/Get-WimInfo" "/wimfile:$mainOSDrive\tiny11\sources\install.wim")
+$index = Read-Host "Please enter the image index"
+[console]::writeline("Mounting Windows image. This may take a while.")
+$wimFilePath = "$($env:SystemDrive)\tiny11\sources\install.wim"
+[void](& takeown "/F" $wimFilePath)
+[vois](& icacls $wimFilePath "/grant" "$($adminGroup.Value):(F)")
+try {
+    [void] (Set-ItemProperty -Path $wimFilePath -Name IsReadOnly -Value $false -ErrorAction SIlentlyContinue)
+} catch {
+    [console]::writeline("$PSITEM.Exception.ScriptStackTrace")
+    # This block will catch the error and suppress it.
+    [void]([System.IO.File]::SetAttributes($wimFilePath, "ReadOnly"))
+}
+[void] (New-Item -ItemType Directory -Force -Path "$mainOSDrive\scratchdir")
+[void](& dism /English "/mount-image" "/imagefile:$($env:SystemDrive)\tiny11\sources\install.wim" "/index:$index" "/mountdir:$($env:SystemDrive)\scratchdir")
+[void] ($imageIntl = & dism /English /Get-Intl "/Image:$($env:SystemDrive)\scratchdir")
+[void] ($languageLine = $imageIntl -split '\n' | Where-Object { $_ -match 'Default system UI language : ([a-zA-Z]{2}-[a-zA-Z]{2})' })
+
+if ($languageLine) {
+    $languageCode = $Matches[1]
+     [console]::writeline("Default system UI language code: $languageCode")
+} else {
+     [console]::writeline("Default system UI language code not found.")
+}
+
+[void]($imageInfo = & 'dism' '/English' '/Get-WimInfo' "/wimFile:$($env:SystemDrive)\tiny11\sources\install.wim" "/index:$index")
+[void]($lines = $imageInfo -split '\r?\n')
+
+foreach ($line in $lines) {
+    if ($line -like '*Architecture : *') {
+        $architecture = $line -replace 'Architecture : ',''
+        if (-not $architecture) {
+            [console]::writeline("Architecture information not found.")
+        }
+        # If the architecture is x64, replace it with amd64
+        else ($architecture -eq 'x64') {
+            $architecture = 'amd64'
+        }
+        [console]::writeline("Architecture: $architecture")
+        break
+    }
+}
+# ENDOF ------------------------------------------------------------------------
+```
 
 ## Global Refactoring Notes
 

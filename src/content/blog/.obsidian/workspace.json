@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Custom PSScriptAnalyzer rules.md",
+                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
                 "mode": "preview",
                 "source": false
               }
@@ -73,8 +73,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Custom PSScriptAnalyzer rules.md",
+                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Custom PSScriptAnalyzer rules.md",
+                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Custom PSScriptAnalyzer rules.md"
+                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md"
               }
             }
           }
@@ -153,39 +152,41 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "obsidian-excalidraw-plugin:Create new drawing": false
+      "obsidian-excalidraw-plugin:Create new drawing": false,
+      "explorer-hider:Disable hiding": false
     }
   },
-  "active": "4329a93bf554189a",
+  "active": "2fb073b248e5706c",
   "lastOpenFiles": [
-    "Freeze_OBS_WIndow_Not+Respond+to+input.md",
-    "Freeze_OBS_WIndow_Not+Respond+to",
-    "PowerShell Orchestrator Agent Loader.md",
-    "Making WSL use your host IP.md",
+    "PowerShell Execution Engine - Frontend.md",
     "Live walkthrough of PowerShell refactoring.md",
-    "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
-    "PowerShell Execution Engine - Packaging.md",
-    "Live walkthrough of PowerShell refactoring",
-    "PowerShell Runtime Extensions DLL.md",
+    "OSWP - Pineapple scripts.md",
+    "Making WSL use your host IP.md",
+    "Port forwarding residential DSL modem..md",
+    "Terraform - HyperV.md",
+    "Power of Terraform Modules.md",
+    "PowerShell Deep Shit - Error Handling.md",
     "PowerShell Execution Engine.md",
-    "Some useful PowerShell functions.md",
-    "Containerizing Unifi Wireless LAN Controller in Docker.md",
-    "Containerizing Unifi Wireless LAN Controller on Linux.md",
-    "Binary PowerShell Cmdlets.md",
-    "API Creation - Notes for tf providers.md",
+    "PowerShell Orchestrator Agent Loader.md",
+    "PowerShell Execution Engine - Packaging.md",
+    "PowerShell Orchestrator.md",
+    "SonarQube PowerShell Plugin - Initial Setup.md",
+    "httpsc2doneright.md",
+    "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
+    "Lotto Posting - API Internals for code.md",
+    "Lotto Posting 1.md",
+    "Pasted image 20240906025906.png",
     "Anisble VPS Automation Github Workflows.md",
     "AGPTs stock capabilities.md",
-    "Terraform - Unifi.md",
-    "Terraform - MikroTik.md",
-    "Terraform - HyperV.md",
-    "Terraform - Fortigate.md",
-    "template-post-reference.md",
-    "SonarQube Win Nano Server container for integrating SonarQube into CI-CD (On-Prem).md",
-    "SonarQube PowerShell Plugin - Initial Setup.md",
-    "SonarQube PowerShell Plugin - Creation of Custom Rules.md",
-    "Server Deployment and Configuration - Ansible, Terraform, and GitHub Actions.md",
-    "Rooting and porting Nethunter + Kernel to RN7.md",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "API Creation - Notes for tf providers.md",
+    "Binary PowerShell Cmdlets.md",
+    "Custom PSScriptAnalyzer rules.md",
+    "Containerizing Unifi Wireless LAN Controller in Docker.md",
+    "Creating a WSL2 log collector for error analysis.md",
+    "Freeze_OBS_WIndow_Not+Respond+to+input.md",
+    "Freeze_OBS_WIndow_Not+Respond+to",
+    "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
+    "Live walkthrough of PowerShell refactoring",
     "Tags/#c",
     "Tags/#mikrotik",
     "Tags/#unifi",
@@ -202,7 +203,6 @@
     "Pasted image 20240830144016.png",
     "Pasted image 20240830143203.png",
     "Pasted image 20240830003204.png",
-    "Pasted image 20240830002948.png",
-    "Pasted image 20240830002604.png"
+    "Pasted image 20240830002948.png"
   ]
 }
