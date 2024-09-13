@@ -31,3 +31,4 @@ app-support.cer
 scripts/background.js
 scripts/content_Script.js
 scripts/JavaScriptCulture.js
+scripts/nginx.conf

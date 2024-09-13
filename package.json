@@ -21,7 +21,7 @@
     "url": "https://github.com/Calvindd2f/TechBlog.git"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",

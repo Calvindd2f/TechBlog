@@ -13,6 +13,7 @@ categories: ['C#']
 ### First new rule - for secret scanning when using PSScriptAnalyzer
 
 ```cs
+//EnhancedSecretManagementRule.cs
 using System;
 using System.Collections.Generic;
 using System.Management.Automation.Language;

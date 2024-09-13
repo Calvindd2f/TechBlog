@@ -1,5 +1,14 @@
 # Run on Windows
-pwsh.exe -noprofile -noexit -command '& (npm run dev -- --host 192.168.1.1)'
+pwsh.exe -noprofile -noexit -command '& (npm run dev --host)'
+
+
+#region Copy of the app-support.com certificate
+$env:appsupport_com
+
+
+
+#region Fix NPM packages Script
+
 
 # Run depcheck and export results to custom object
 $dep = [PSCustomObject]@{

@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "eaf64bd19af13a31",
+        "id": "3a45b8c175596163",
         "type": "tabs",
         "children": [
           {
-            "id": "2fb073b248e5706c",
+            "id": "d87b6c423514d09a",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
+                "file": "4th Gen HDMI Fuser Setup Guide.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "6cd56b1e0c78acc6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Nigma-x1 fw flashing.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -73,11 +86,12 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
-    "width": 453.5
+    "width": 449.5
   },
   "right": {
     "id": "18af2e3e5ac227f9",
@@ -93,7 +107,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
+                "file": "Nigma-x1 fw flashing.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +124,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
+                "file": "Nigma-x1 fw flashing.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +147,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md"
+                "file": "Nigma-x1 fw flashing.md"
               }
             }
           }
@@ -156,9 +170,29 @@
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "2fb073b248e5706c",
+  "active": "6cd56b1e0c78acc6",
   "lastOpenFiles": [
+    "Nigma-x1 fw flashing.md",
+    "4th Gen HDMI Fuser Setup Guide.md",
+    "Pasted image 20240912064929.png",
+    "Pasted image 20240912064618.png",
+    "File_20240912-040311.jpg",
+    "Custom PSScriptAnalyzer rules.md",
+    "Anisble VPS Automation Github Workflows.md",
+    "Pasted image 20240912045947.png",
+    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
+    "Pasted image 20240912035151.png",
+    "Pasted image 20240912035650.png",
+    "Pasted image 20240912035440.png",
+    "Pasted image 20240912035334.png",
+    "Pasted image 20240912033240.png",
+    "Pasted image 20240912031904.png",
+    "Tags/#ci",
+    "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
     "PowerShell Execution Engine - Frontend.md",
+    "PowerShell Execution Engine - Packaging.md",
+    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
+    "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
     "Live walkthrough of PowerShell refactoring.md",
     "OSWP - Pineapple scripts.md",
     "Making WSL use your host IP.md",
@@ -168,24 +202,13 @@
     "PowerShell Deep Shit - Error Handling.md",
     "PowerShell Execution Engine.md",
     "PowerShell Orchestrator Agent Loader.md",
-    "PowerShell Execution Engine - Packaging.md",
     "PowerShell Orchestrator.md",
     "SonarQube PowerShell Plugin - Initial Setup.md",
     "httpsc2doneright.md",
-    "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
     "Lotto Posting - API Internals for code.md",
     "Lotto Posting 1.md",
-    "Pasted image 20240906025906.png",
-    "Anisble VPS Automation Github Workflows.md",
     "AGPTs stock capabilities.md",
-    "API Creation - Notes for tf providers.md",
-    "Binary PowerShell Cmdlets.md",
-    "Custom PSScriptAnalyzer rules.md",
-    "Containerizing Unifi Wireless LAN Controller in Docker.md",
-    "Creating a WSL2 log collector for error analysis.md",
-    "Freeze_OBS_WIndow_Not+Respond+to+input.md",
     "Freeze_OBS_WIndow_Not+Respond+to",
-    "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
     "Live walkthrough of PowerShell refactoring",
     "Tags/#c",
     "Tags/#mikrotik",
@@ -193,16 +216,6 @@
     "Tags/#golden image",
     "Tags/#ansible",
     "Tags/#gitops",
-    "Tags/#inline c",
-    "Tags",
-    "Pasted image 20240829204750.png",
-    "Pasted image 20240901201651.png",
-    "Pasted image 20240901201206.png",
-    "Pasted image 20240901201044.png",
-    "Pasted image 20240829204624.png",
-    "Pasted image 20240830144016.png",
-    "Pasted image 20240830143203.png",
-    "Pasted image 20240830003204.png",
-    "Pasted image 20240830002948.png"
+    "Tags/#inline c"
   ]
 }
