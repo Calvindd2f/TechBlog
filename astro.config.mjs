@@ -11,10 +11,9 @@ import { manifest } from './src/utils/manifest';
 import react from '@astrojs/react';
 import basicSsl from '@vitejs/plugin-basic-ssl';
 
-
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://localhost:4321/',
+  site: 'https://app-support.com',
   image: {
     remotePatterns: [{ protocol: 'https' }],
   },
@@ -41,14 +40,14 @@ export default defineConfig({
     react(),
   ],
   devToolbar: {
-    enabled: true,
+    enabled: false,
   },
   vite: {
     plugins: [
       basicSsl({
         name: 'app-support',
         domain: 'app-support.com',
-        certDir: 'C:/Users/c/AppData/Local/Posh-ACME/LE_PROD/1928734016/app-support.com/',
+        certDir: 'C:/Users/c/calvin/__move-pending_Coding-Tech-Blog/boilerplate_tempaltes/Astro-Tech-Blog-Boilerplate-main/tech_blog/TechBlog/.internal/',
       }),
       VitePWA({
         registerType: 'autoUpdate',

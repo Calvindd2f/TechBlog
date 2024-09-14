@@ -7,9 +7,10 @@ export default {
       /** name of certification */
       name: 'app-support',
       /** custom trust domains */
-      domains: ['app-support.com'],
+      domains: ['app-support.com', 'www.app-support.com'],
       /** custom certification directory */
-      certDir: '/app-support.cer',
+      certDir:
+        'C:/Users/c/calvin__move-pending_Coding-Tech-Blog/boilerplate_tempaltes/Astro-Tech-Blog-Boilerplate-main/tech_blog/TechBlog/.internal',
     }),
   ],
 };

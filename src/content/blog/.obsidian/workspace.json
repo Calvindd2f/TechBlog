@@ -25,14 +25,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Nigma-x1 fw flashing.md",
+                "file": "PowerShell Engine - Frontend-2.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "2f4c5edf02f58ffb",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PowerShell Engine - Frontend Dependencies.md",
                 "mode": "preview",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -107,7 +119,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Nigma-x1 fw flashing.md",
+                "file": "PowerShell Engine - Frontend Dependencies.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -124,7 +136,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Nigma-x1 fw flashing.md",
+                "file": "PowerShell Engine - Frontend Dependencies.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -147,7 +159,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Nigma-x1 fw flashing.md"
+                "file": "PowerShell Engine - Frontend Dependencies.md"
               }
             }
           }
@@ -170,8 +182,14 @@
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "6cd56b1e0c78acc6",
+  "active": "2f4c5edf02f58ffb",
   "lastOpenFiles": [
+    "PowerShell Engine - Frontend Dependencies.md",
+    "PowerShell Engine - Frontend-2.md",
+    "PowerShell Engine - Frontend-1.md",
+    "PowerShell Engine Agent Loader.md",
+    "PowerShell Execution Engine - Packaging.md",
+    "PowerShell Engine - PowerShell Runtime Extensions DLL.md",
     "Nigma-x1 fw flashing.md",
     "4th Gen HDMI Fuser Setup Guide.md",
     "Pasted image 20240912064929.png",
@@ -188,9 +206,7 @@
     "Pasted image 20240912033240.png",
     "Pasted image 20240912031904.png",
     "Tags/#ci",
-    "PowerShell Execution Engine - PowerShell Runtime Extensions DLL.md",
     "PowerShell Execution Engine - Frontend.md",
-    "PowerShell Execution Engine - Packaging.md",
     "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
     "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
     "Live walkthrough of PowerShell refactoring.md",
@@ -201,13 +217,10 @@
     "Power of Terraform Modules.md",
     "PowerShell Deep Shit - Error Handling.md",
     "PowerShell Execution Engine.md",
-    "PowerShell Orchestrator Agent Loader.md",
     "PowerShell Orchestrator.md",
     "SonarQube PowerShell Plugin - Initial Setup.md",
     "httpsc2doneright.md",
     "Lotto Posting - API Internals for code.md",
-    "Lotto Posting 1.md",
-    "AGPTs stock capabilities.md",
     "Freeze_OBS_WIndow_Not+Respond+to",
     "Live walkthrough of PowerShell refactoring",
     "Tags/#c",
