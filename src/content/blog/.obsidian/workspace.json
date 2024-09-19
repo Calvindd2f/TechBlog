@@ -8,43 +8,18 @@
         "type": "tabs",
         "children": [
           {
-            "id": "d87b6c423514d09a",
+            "id": "4ae1f4c76738f04d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "4th Gen HDMI Fuser Setup Guide.md",
+                "file": "b2.md",
                 "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6cd56b1e0c78acc6",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PowerShell Engine - Frontend-2.md",
-                "mode": "preview",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "2f4c5edf02f58ffb",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "PowerShell Engine - Frontend Dependencies.md",
-                "mode": "preview",
-                "source": false
+                "source": true
               }
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "vertical"
@@ -119,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PowerShell Engine - Frontend Dependencies.md",
+                "file": "b2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -136,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PowerShell Engine - Frontend Dependencies.md",
+                "file": "b2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -159,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PowerShell Engine - Frontend Dependencies.md"
+                "file": "b2.md"
               }
             }
           }
@@ -182,45 +157,46 @@
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "2f4c5edf02f58ffb",
+  "active": "4ae1f4c76738f04d",
   "lastOpenFiles": [
-    "PowerShell Engine - Frontend Dependencies.md",
-    "PowerShell Engine - Frontend-2.md",
-    "PowerShell Engine - Frontend-1.md",
-    "PowerShell Engine Agent Loader.md",
-    "PowerShell Execution Engine - Packaging.md",
-    "PowerShell Engine - PowerShell Runtime Extensions DLL.md",
-    "Nigma-x1 fw flashing.md",
-    "4th Gen HDMI Fuser Setup Guide.md",
+    "b43.md",
+    "b42.md",
+    "b41.md",
+    "b40.md",
+    "b39.md",
+    "b38.md",
+    "b37.md",
+    "b36.md",
+    "b35.md",
+    "b34.md",
+    "b33.md",
+    "b32.md",
+    "b31.md",
+    "b30.md",
+    "b29.md",
+    "b28.md",
+    "b27.md",
+    "b26.md",
+    "b25.md",
+    "b24.md",
+    "b23.md",
+    "b21.md",
+    "b20.md",
+    "b22.md",
+    "b19.md",
+    "b18.md",
+    "Pasted image 20240919032653.png",
+    "File_20240912-040311.jpg",
+    "Excalidraw",
     "Pasted image 20240912064929.png",
     "Pasted image 20240912064618.png",
-    "File_20240912-040311.jpg",
-    "Custom PSScriptAnalyzer rules.md",
-    "Anisble VPS Automation Github Workflows.md",
     "Pasted image 20240912045947.png",
-    "Rewriting ExchangeOnlineManagemenet in CSharp.md",
     "Pasted image 20240912035151.png",
     "Pasted image 20240912035650.png",
     "Pasted image 20240912035440.png",
     "Pasted image 20240912035334.png",
     "Pasted image 20240912033240.png",
-    "Pasted image 20240912031904.png",
     "Tags/#ci",
-    "PowerShell Execution Engine - Frontend.md",
-    "PowerShell Deep Dive - Enhanced API calls and effective print debugging..md",
-    "LogUtil in C++ - Compiled via Zig - Ported to CSharp.md",
-    "Live walkthrough of PowerShell refactoring.md",
-    "OSWP - Pineapple scripts.md",
-    "Making WSL use your host IP.md",
-    "Port forwarding residential DSL modem..md",
-    "Terraform - HyperV.md",
-    "Power of Terraform Modules.md",
-    "PowerShell Deep Shit - Error Handling.md",
-    "PowerShell Execution Engine.md",
-    "PowerShell Orchestrator.md",
-    "SonarQube PowerShell Plugin - Initial Setup.md",
-    "httpsc2doneright.md",
-    "Lotto Posting - API Internals for code.md",
     "Freeze_OBS_WIndow_Not+Respond+to",
     "Live walkthrough of PowerShell refactoring",
     "Tags/#c",
@@ -228,7 +204,6 @@
     "Tags/#unifi",
     "Tags/#golden image",
     "Tags/#ansible",
-    "Tags/#gitops",
-    "Tags/#inline c"
+    "Tags/#gitops"
   ]
 }

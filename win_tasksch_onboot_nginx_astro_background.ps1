@@ -34,7 +34,6 @@ Function Add-Path([string]$inputObjectPath)
             }
     }
 };
-
 $repo=[PSCustomObject]@{
     Portal = 'C:\Users\c\Portal\Portal'
     TechBlog = 'C:\Users\c\calvin\__move-pending_Coding-Tech-Blog\boilerplate_tempaltes\Astro-Tech-Blog-Boilerplate-main\tech_blog\TechBlog'
@@ -59,3 +58,6 @@ nginx -T
 nginx -s reload
 cd $pwd
 # Registered Task for check SSL certificate expiry is in -lt 1 week or past due
+
+nginx &
+npx astro dev --host &

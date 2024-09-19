@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /
+
+/* DOMAIN NAME INTEREST */
+	Contact: C@lvin.ie
+	Note: Please try to email as it's more likely to be seen. Second best below.
+	Discord: Dreadytofat
