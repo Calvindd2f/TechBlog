@@ -30,4 +30,4 @@ src/content/blog/.obsidian/*
 scripts/background.js
 scripts/content_Script.js
 scripts/JavaScriptCulture.js
-.internal/*
+.internal/
