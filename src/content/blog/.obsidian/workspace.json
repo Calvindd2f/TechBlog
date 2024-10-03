@@ -4,18 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "3a45b8c175596163",
+        "id": "aa3abc73e6bcec5b",
         "type": "tabs",
         "children": [
           {
-            "id": "4ae1f4c76738f04d",
+            "id": "b771a26609f11361",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "b2.md",
+                "file": "b15.md",
                 "mode": "preview",
-                "source": true
+                "source": false
               }
             }
           }
@@ -73,12 +73,11 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 449.5
+    "width": 454.5
   },
   "right": {
     "id": "18af2e3e5ac227f9",
@@ -94,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "b2.md",
+                "file": "b15.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "b2.md",
+                "file": "b15.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -134,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "b2.md"
+                "file": "b15.md"
               }
             }
           }
@@ -154,12 +153,25 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
+      "obsidian-projects:Open projects": false,
+      "modalforms:Edit forms": false,
+      "templater-obsidian:Templater": false,
+      "obsidian-git:Open Git source control": false,
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "4ae1f4c76738f04d",
+  "active": "90a07e3f1c9f5d97",
   "lastOpenFiles": [
+    "Rrewst/Key Highlights and Features.md",
+    "Rrewst/Features.md",
+    "Tags/#c",
+    "Tags/#inline c",
+    "Untitled.md",
     "b43.md",
+    "Rrewst",
+    "b0.md",
+    "b2.md",
+    "Tags",
     "b42.md",
     "b41.md",
     "b40.md",
@@ -180,11 +192,6 @@
     "b25.md",
     "b24.md",
     "b23.md",
-    "b21.md",
-    "b20.md",
-    "b22.md",
-    "b19.md",
-    "b18.md",
     "Pasted image 20240919032653.png",
     "File_20240912-040311.jpg",
     "Excalidraw",
@@ -199,11 +206,7 @@
     "Tags/#ci",
     "Freeze_OBS_WIndow_Not+Respond+to",
     "Live walkthrough of PowerShell refactoring",
-    "Tags/#c",
     "Tags/#mikrotik",
-    "Tags/#unifi",
-    "Tags/#golden image",
-    "Tags/#ansible",
-    "Tags/#gitops"
+    "Tags/#unifi"
   ]
 }
