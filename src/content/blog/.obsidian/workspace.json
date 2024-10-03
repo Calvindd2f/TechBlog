@@ -4,17 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "aa3abc73e6bcec5b",
+        "id": "b97d778cf0e1336b",
         "type": "tabs",
         "children": [
           {
-            "id": "b771a26609f11361",
+            "id": "d72661d43a8f86ff",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "b15.md",
-                "mode": "preview",
+                "file": "Rewriting the EXO module in C# powershell  2.md",
+                "mode": "source",
                 "source": false
               }
             }
@@ -93,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "b15.md",
+                "file": "Rewriting the EXO module in C# powershell  2.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "b15.md",
+                "file": "Rewriting the EXO module in C# powershell  2.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "b15.md"
+                "file": "Rewriting the EXO module in C# powershell  2.md"
               }
             }
           }
@@ -160,38 +160,38 @@
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "90a07e3f1c9f5d97",
+  "active": "d72661d43a8f86ff",
   "lastOpenFiles": [
+    "b0.md",
+    "Rewriting the EXO module in C# powershell  2.md",
+    "b31.md",
+    "b23.md",
+    "b44.md",
+    "b41.md",
+    "b38.md",
+    "b40.md",
+    "b32.md",
+    "b28.md",
+    "b34.md",
+    "b36.md",
+    "b24.md",
+    "b4.md",
+    "b1.md",
+    "b5.md",
+    "b11.md",
+    "b13.md",
+    "b17.md",
+    "b19.md",
+    "b20.md",
+    "b43.md",
+    "b7.md",
+    "b12.md",
+    "b15.md",
     "Rrewst/Key Highlights and Features.md",
-    "Rrewst/Features.md",
     "Tags/#c",
     "Tags/#inline c",
-    "Untitled.md",
-    "b43.md",
     "Rrewst",
-    "b0.md",
-    "b2.md",
     "Tags",
-    "b42.md",
-    "b41.md",
-    "b40.md",
-    "b39.md",
-    "b38.md",
-    "b37.md",
-    "b36.md",
-    "b35.md",
-    "b34.md",
-    "b33.md",
-    "b32.md",
-    "b31.md",
-    "b30.md",
-    "b29.md",
-    "b28.md",
-    "b27.md",
-    "b26.md",
-    "b25.md",
-    "b24.md",
-    "b23.md",
     "Pasted image 20240919032653.png",
     "File_20240912-040311.jpg",
     "Excalidraw",

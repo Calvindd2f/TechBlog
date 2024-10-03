@@ -5,12 +5,5 @@
   "make-md",
   "shiki-highlighter",
   "explorer-hider",
-  "obsidian-advanced-codeblock",
-  "dataview",
-  "obsidian-projects",
-  "modalforms",
-  "quickadd",
-  "templater-obsidian",
-  "obsidian-git",
-  "obsidian-linter"
+  "obsidian-advanced-codeblock"
 ]
