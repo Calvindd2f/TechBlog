@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Rewriting the EXO module in C# powershell  2.md",
-                "mode": "source",
+                "file": "b33.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -73,7 +73,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 3
       }
     ],
     "direction": "horizontal",
@@ -93,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Rewriting the EXO module in C# powershell  2.md",
+                "file": "b33.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -110,7 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Rewriting the EXO module in C# powershell  2.md",
+                "file": "b33.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,7 +134,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Rewriting the EXO module in C# powershell  2.md"
+                "file": "b33.md"
               }
             }
           }
@@ -153,27 +154,28 @@
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
       "obsidian-excalidraw-plugin:Create new drawing": false,
-      "obsidian-projects:Open projects": false,
-      "modalforms:Edit forms": false,
-      "templater-obsidian:Templater": false,
-      "obsidian-git:Open Git source control": false,
       "explorer-hider:Disable hiding": false
     }
   },
   "active": "d72661d43a8f86ff",
   "lastOpenFiles": [
-    "b0.md",
+    "b34.md",
+    "b33.md",
+    "b36.md",
+    "b37.md",
+    "b38.md",
+    "b35.md",
+    "b41.md",
+    "b40.md",
+    "b42.md",
+    "b43.md",
     "Rewriting the EXO module in C# powershell  2.md",
+    "b44.md",
+    "b0.md",
     "b31.md",
     "b23.md",
-    "b44.md",
-    "b41.md",
-    "b38.md",
-    "b40.md",
     "b32.md",
     "b28.md",
-    "b34.md",
-    "b36.md",
     "b24.md",
     "b4.md",
     "b1.md",
@@ -183,11 +185,6 @@
     "b17.md",
     "b19.md",
     "b20.md",
-    "b43.md",
-    "b7.md",
-    "b12.md",
-    "b15.md",
-    "Rrewst/Key Highlights and Features.md",
     "Tags/#c",
     "Tags/#inline c",
     "Rrewst",
