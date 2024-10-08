@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "b97d778cf0e1336b",
+        "id": "16a6ba0a4dd97041",
         "type": "tabs",
         "children": [
           {
-            "id": "d72661d43a8f86ff",
+            "id": "0356bfd88573ada2",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "b33.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -94,7 +90,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "b33.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -111,7 +106,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "b33.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -133,9 +127,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "b33.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -157,10 +149,13 @@
       "explorer-hider:Disable hiding": false
     }
   },
-  "active": "d72661d43a8f86ff",
+  "active": "0356bfd88573ada2",
   "lastOpenFiles": [
-    "b34.md",
     "b33.md",
+    "b46.md",
+    "b45 copy.md",
+    "b45.md",
+    "b34.md",
     "b36.md",
     "b37.md",
     "b38.md",
@@ -182,9 +177,6 @@
     "b5.md",
     "b11.md",
     "b13.md",
-    "b17.md",
-    "b19.md",
-    "b20.md",
     "Tags/#c",
     "Tags/#inline c",
     "Rrewst",

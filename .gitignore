@@ -22,17 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-src/content/blog/.makemd/*
-src/content/blog/.space/*
-src/content/blog/.trash/*
-src/content/blog/Tags/*
-src/content/blog/.obsidian/*
+.makemd/*
+.space/*
+.trash/*
+/blog/Tags/*
 scripts/background.js
 scripts/content_Script.js
 scripts/JavaScriptCulture.js
 .internal/
-src/content/blog/.makemd/fileCache.mdc
-src/content/blog/.makemd/superstate.mdc
-src/content/blog/.makemd/fileCache.mdc
-src/content/blog/.obsidian/workspace.json
-src/content/blog/.obsidian/plugins/make-md/Spaces.mdb
+.space*
+.makemd*
+.obsidian*
