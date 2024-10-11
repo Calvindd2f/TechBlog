@@ -33,3 +33,5 @@ scripts/JavaScriptCulture.js
 .space*
 .makemd*
 .obsidian*
+nginx.conf
+app-support.*
